@@ -67,6 +67,33 @@ splits {
 
 2.Run `pod install`
 
+3.Add the following in your podfile
+`use_frameworks!` below `prepare_react_native_project!`
+
+and
+
+```
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        # Bitcode is deprecated by Apple
+        config.build_settings['ENABLE_BITCODE'] = 'NO'
+      end
+    end
+```
+
+below
+```
+  post_install do |installer|
+    react_native_post_install(
+      installer,
+      # Set `mac_catalyst_enabled` to `true` in order to apply patches
+      # necessary for Mac Catalyst builds
+      :mac_catalyst_enabled => false
+    )
+```
+
+take reference from [here](https://github.com/Anaslokhandwala/Accurascan_KYC/blob/master/ios/Podfile)
+
 **Add this permissions into iOS Info.plist file.**
 
 ```
@@ -80,7 +107,8 @@ splits {
 
 ## 3.Setup Accura Scan licenses into your projects
 
-Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from here
+Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from [here](https://accurascan.com/developer/dashboard)
+
 **key.license**
 
 This license is compulsory for this library to work. it will get all setup of accura SDK.
