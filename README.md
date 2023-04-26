@@ -72,7 +72,7 @@ splits {
 2.Add the following in your podfile
 `use_frameworks!` below `prepare_react_native_project!`
 
-and
+and if your xcode version is less than 14, add the following code 
 
 ```
     installer.pods_project.targets.each do |target|
@@ -156,21 +156,13 @@ Place both the license in your project's Runner directory, and add the licenses 
 **Error:** String
 
 **Success:** JSON String Response = {
-
-**countries:** Array[<CountryModels>],
-
-**barcodes:** Array[],
-
-**isValid:** boolean,
-
-**isOCREnable:** boolean,
-
-**isBarcodeEnable:** boolean,
-
-**isBankCardEnable:** boolean,
-
-**isMRZEnable:** boolean
-
+countries: Array[<CountryModels>],
+barcodes: Array[],
+isValid: boolean,
+isOCREnable: boolean,
+isBarcodeEnable: boolean,
+isBankCardEnable: boolean,
+isMRZEnable: boolean
 }
 
 ### Setting up Configuration's,Error mssages and Scaning title messages
@@ -276,19 +268,12 @@ onPressMRZ = () => {
 #### value: other_mrz or passport_mrz or id_mrz or visa_mrz<br></br>
 
 **Success:** JSON Response {
-
-**front_data:** JSONObjects?,
-
-**back_data:** JSONObjects?,
-
-**type:** Recognition Type,
-
-**face:** URI?
-
-**front_img:** URI?
-
-**back_img:** URI?
-
+front_data: JSONObjects?,
+back_data: JSONObjects?,
+type: Recognition Type,
+face: URI?
+front_img: URI?
+back_img: URI?
 }
 
 **Error:** String
@@ -310,10 +295,10 @@ onPressOCR = () => {
 
  if (isValid) {
    let passArgs = [
-     this.countrySelected.id,
-     this.cardSelected.id,
-     this.cardSelected.name,
-     this.cardSelected.type,
+     this.countrySelected.id,  //integer
+     this.cardSelected.id,     //integer
+     this.cardSelected.name,   //String
+     this.cardSelected.type,   //integer
    ]; //[{"enableLogs":false},1,41,"Emirates National ID",0,"portrait-primary"]
    //Method for start OCR scaning from native OS.
    AccurascanKyc.startOcrWithCard(passArgs, (error, response) => {
@@ -326,26 +311,7 @@ onPressOCR = () => {
  }
 };
 ```
-
-**CountryId:** integer
-
-**value:** Id of selected country.
-
-**CardId:** integer
-
-**value:** Id of selected card.
-
-**CardName:** String
-
-**value:** Name of selected card.
-
-**CardType:** integer
-
-**value:** Type of selected card.
-
-**Success:** JSON Response {
-}
-
+**Success:** JSON Response 
 **Error:** String
 
 ## 7.Method for scan barcode.
@@ -372,13 +338,7 @@ onPressBarcode = () => {
 };
 ```
 
-**BarcodeType:** String
-
-**value:** Type of barcode documents.
-
-**Success:** JSON Response {
-}
-
+**Success:** JSON Response 
 **Error:** String
 
 ## 8.Method for scan bankcard.
@@ -395,9 +355,7 @@ onPressBankcard = () => {
 };
 ```
 
-**Success:** JSON Response {
-}
-
+**Success:** JSON Response
 **Error:** String
 
 ## 8.Method for get face match percentages between two face.
@@ -441,10 +399,6 @@ onPressFaceMatch = () => {
  });
 };
 ```
-
-**accuraConfs:** JSON Object
-
-**face_uri:** URI
 
 **Success:** JSON Response {
 detect: URI?
@@ -500,18 +454,10 @@ onPressStartLiveness = () => {
 };
 ```
 
-**accuraConfs:** JSON Object
-
-**face_uri:** 'uri of face'
-
 **Success:** JSON Response {
-
 detect: URI?,
-
 Face_score: Float,
-
 score: Float,
-
 }
 
 **Error:** String
@@ -647,16 +593,12 @@ _For Facematch 2_
 ```
 
 **accuraConfs:** JSON Object
-
 **Face1:** 'uri of face1'
-
 **Face2:** ’uri of face2’
 
 **Success:** JSON Response {
-
-**Image:** URI?,
-
-**score:** String,
+Image: URI?,
+score: String,
 }
 
 **Error:** String
