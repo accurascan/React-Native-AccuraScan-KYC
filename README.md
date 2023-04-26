@@ -12,8 +12,12 @@ Below steps to setup Accura Scan's SDK to your project.
 
 `yarn add 'accurascan_kyc'`
 
+OR
+
+`npm i accurascan_kyc`
+
 **Usage**
-Import flutter library into file.
+Import npm library into file.
 `import AccurascanKyc from 'accurascan_kyc';`
 
 
@@ -65,9 +69,7 @@ splits {
 
 1.Install Git LFS using command install `git-lfs`
 
-2.Run `pod install`
-
-3.Add the following in your podfile
+2.Add the following in your podfile
 `use_frameworks!` below `prepare_react_native_project!`
 
 and
@@ -94,6 +96,8 @@ below
 
 take reference from [here](https://github.com/Anaslokhandwala/Accurascan_KYC/blob/master/ios/Podfile)
 
+3.Run `pod install`
+
 **Add this permissions into iOS Info.plist file.**
 
 ```
@@ -107,7 +111,7 @@ take reference from [here](https://github.com/Anaslokhandwala/Accurascan_KYC/blo
 
 ## 3.Setup Accura Scan licenses into your projects
 
-Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from [here](https://accurascan.com/developer/dashboard)
+Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from [here](https://accurascan.com/developer/dashboard) using your bundle id.
 
 **key.license**
 
