@@ -45,6 +45,9 @@ allprojects {
 **Add it in your app/build.gradle file.**
 
 ```
+android {
+...
+
 packagingOptions {
    pickFirst 'lib/arm64-v8a/libcrypto.so'
    pickFirst 'lib/arm64-v8a/libssl.so'
@@ -65,6 +68,7 @@ splits {
     enable true
     include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
   }
+ }
 }
 ```
 
