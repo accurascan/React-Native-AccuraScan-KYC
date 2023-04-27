@@ -66,7 +66,13 @@ splits {
 
 ## 2.Setup iOS
 
-1.Install Git LFS using command install `git-lfs`
+1.Install Git LFS using command install `brew install git-lfs` OR `port install git-lfs`
+
+Verify that the installation was successful:
+```
+$ git lfs install
+> Git LFS initialized.
+```
 
 2.Add the following in your podfile
 `use_frameworks!` below `prepare_react_native_project!`
@@ -112,7 +118,7 @@ Generate your Accura Scan license from https://accurascan.com/developer/dashboar
 **For iOS**
 
 ```
-Place both the license in your project's Runner directory, and add the licenses to the target.
+Place both the license in your <project name>/ios/project's directory, and add the licenses to the target.
 ```
 
 ## 4.Get license configuration from SDK. It returns all active functionalities of your license.
@@ -207,7 +213,7 @@ isMRZEnable: boolean
       [config, accuraConfigs, accuraTitleMsg],
       (error, response) => {
         if (error != null) {
-          console.log('Failur!', error);
+          console.log(error);
         } else {
           console.log('Message:- ', response);
         }
@@ -221,30 +227,21 @@ isMRZEnable: boolean
 
 ```
 onPressMRZ = () => {
- var isValid = true;
- if (this.mrzSelected === '' || this.mrzSelected === null) {
-   this.setState({ isValidType: false });
-   isValid = false;
- }
-
- if (isValid) {
-   let passArgs = [this.mrzSelected];
+   let passArgs = [this.mrzSelected];  //pass other_mrz or passport_mrz or id_mrz or visa_card as String
    //Method for start MRZ scaning from native OS.
    AccurascanKyc.startMRZ(passArgs, (error, response) => {
      if (error != null) {
-       console.log('Failure!', error);
-       this.showAlert('Failure!', error);
+       console.log(error);
      } else {
        console.log('Success!', response);
      }
    });
- }
 };
 ```
 
 **MRZType:** String
 
-#### value: other_mrz or passport_mrz or id_mrz or visa_mrz<br></br>
+#### value: other_mrz or passport_mrz or id_mrz or visa_card<br></br>
 
 **Success:** JSON Response {
 front_data: JSONObjects?,
@@ -261,19 +258,8 @@ back_img: URI?
 
 ```
 onPressOCR = () => {
- var isValid = true;
- if (this.countrySelected === null || this.countrySelected === '') {
-   this.setState({ isValidCountry: false });
-   isValid = false;
- }
-
- if (this.cardSelected === null || this.cardSelected === '') {
-   this.setState({ isValidCard: false });
-   isValid = false;
- }
-
- if (isValid) {
    let passArgs = [
+     // all the values will be provided by the license
      this.countrySelected.id,  //integer
      this.cardSelected.id,     //integer
      this.cardSelected.name,   //String
@@ -282,12 +268,11 @@ onPressOCR = () => {
    //Method for start OCR scaning from native OS.
    AccurascanKyc.startOcrWithCard(passArgs, (error, response) => {
      if (error != null) {
-       console.log('Failure!', error);
+       console.log(error);
      } else {
        console.log('Success!', response);
      }
    });
- }
 };
 ```
 **Success:** JSON Response 
@@ -297,23 +282,15 @@ onPressOCR = () => {
 
 ```
 onPressBarcode = () => {
- var isValid = true;
- if (this.barcodeSelected?.toString() === '') {
-   this.setState({ isValidBarcodeType: false });
-   isValid = false;
- }
-
- if (isValid) {
    let passArgs = [this.barcodeSelected];
    //Method for start MRZ scaning from native OS.
    AccurascanKyc.startBarcode(passArgs, (error, response) => {
      if (error != null) {
-       console.log('Failure!', error);
+       console.log(error);
      } else {
        console.log('Success!', response);
      }
    });
- }
 };
 ```
 
@@ -326,7 +303,7 @@ onPressBarcode = () => {
 onPressBankcard = () => {
  AccurascanKyc.startBankCard((error, response) => {
    if (error != null) {
-     console.log('Failure!', error);
+     console.log(error);
    } else {
       console.log('Success!', response);
    }
@@ -371,7 +348,7 @@ onPressFaceMatch = () => {
 
  AccurascanKyc.startFaceMatch(passArgs, (error, response) => {
    if (error != null) {
-     console.log('Failur!', error);
+     console.log(error);
    } else {
      console.log('Success!', response);
    }
@@ -424,8 +401,7 @@ onPressStartLiveness = () => {
 
  AccurascanKyc.startLiveness(passArgs, (error, response) => {
    if (error != null) {
-     console.log('Failure!', error);
-     this.showAlert('Failure!', error);
+     console.log(error);
    } else {
      console.log('Success!', response);
    }
@@ -456,7 +432,7 @@ openGallery = () => {
 
  AccurascanKyc.openGallery1([accuraConfs], (error, response) => {
    if (error != null) {
-     console.log('Failure!', error);
+     console.log(error);
    } else {
      console.log('Success!', response);
    }
@@ -475,7 +451,7 @@ _For gallery 2_
 
     AccurascanKyc.openGallery2([accuraConfs], (error, response) => {
       if (error != null) {
-        console.log('Failure!', error);
+        console.log(error);
       } else {
         console.log('Success!', response);
       }
@@ -520,7 +496,7 @@ _For Facematch 1:_
 
     AccurascanKyc.startFaceMatch1(passArgs, (error, response) => {
       if (error != null) {
-        console.log('Failure!', error);
+        console.log(error);
       } else {
         console.log('Success!', response);
       }
@@ -563,7 +539,7 @@ _For Facematch 2_
 
     AccurascanKyc.startFaceMatch2(passArgs, (error, response) => {
       if (error != null) {
-        console.log('Failure!', error);
+        console.log(error);
       } else {
         console.log('Success!', response);
       }
@@ -582,8 +558,8 @@ score: String,
 
 **Error:** String
 
-Contributing
-See the contributing guide to learn how to contribute to the repository and the development workflow.
+
+Check [App.js](https://github.com/Anaslokhandwala/Accurascan_KYC/blob/master/App.js) for a demo UI
 
 License:
 MIT
