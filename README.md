@@ -57,10 +57,9 @@ packagingOptions {
 }
 splits {
   abi {
+    ...
     enable true
-    reset()
     include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-    universalApk true
   }
 }
 ```
@@ -72,27 +71,7 @@ splits {
 2.Add the following in your podfile
 `use_frameworks!` below `prepare_react_native_project!`
 
-and if your xcode version is less than 14, add the following code 
-
-```
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        # Bitcode is deprecated by Apple
-        config.build_settings['ENABLE_BITCODE'] = 'NO'
-      end
-    end
-```
-
-below
-```
-  post_install do |installer|
-    react_native_post_install(
-      installer,
-      # Set `mac_catalyst_enabled` to `true` in order to apply patches
-      # necessary for Mac Catalyst builds
-      :mac_catalyst_enabled => false
-    )
-```
+and comment this line `:flipper_configuration => flipper_config`
 
 take reference from [here](https://github.com/Anaslokhandwala/Accurascan_KYC/blob/master/ios/Podfile)
 
