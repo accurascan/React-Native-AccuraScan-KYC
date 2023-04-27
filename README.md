@@ -26,6 +26,10 @@ Import npm library into file.
 **Add it in your root build.gradle at the end of repositories.**
 
 ```
+buildscript {
+...
+}
+
 allprojects {
    repositories {
        google()
@@ -241,7 +245,7 @@ onPressMRZ = () => {
 
 **MRZType:** String
 
-#### value: other_mrz or passport_mrz or id_mrz or visa_card<br></br>
+value: other_mrz or passport_mrz or id_mrz or visa_card<br></br>
 
 **Success:** JSON Response {
 front_data: JSONObjects?,
