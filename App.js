@@ -32,6 +32,7 @@ export default class App extends React.Component {
   result = null;
   facematchURI = '';
   newIndex = 0;
+  flipImage = '';
 
   constructor(props) {
     super(props);
@@ -71,6 +72,9 @@ export default class App extends React.Component {
   }
 
   componentDidMount = () => {
+    const imageSource = require('./assets/images/background.png');
+    this.flipImage = Image.resolveAssetSource(imageSource).uri;
+    console.log('Image path:', this.flipImage);
     BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackButtonClick,
@@ -102,10 +106,14 @@ export default class App extends React.Component {
     };
 
     var accuraConfigs = {
+      flipImage: this.flipImage,
       enableLogs: 1,
       setCameraFacing: 0,
       isShowLogo: 1,
       isFlipImg: 1,
+      CameraScreen_CornerBorder_Enable: false,
+      CameraScreen_Border_Width: 15,
+      Disable_Card_Name: false,
       CameraScreen_Frame_Color: '#D5323F',
       CameraScreen_Text_Color: '#FFFFFF',
       CameraScreen_Text_Border_Color: '#000000',
@@ -345,7 +353,7 @@ export default class App extends React.Component {
       setBlurPercentage: 80,
       setGlarePercentage_0: -1,
       setGlarePercentage_1: -1,
-      setLivenessURL: 'liveness url',
+      setLivenessURL: 'your url',
       setFeedBackLowLightMessage: 'Low light detected',
       feedbackLowLightTolerence: 39,
       feedbackDialogMessage: 'Loading...',
@@ -372,7 +380,6 @@ export default class App extends React.Component {
           isCardListScreen: false,
           isFacematchScreen: false,
           isBarcodeScreen: false,
-          // modalVisible: true,
         });
       }
     });
@@ -743,120 +750,124 @@ export default class App extends React.Component {
       );
     } else if (this.state.isOCRScreen) {
       return (
-        <>
-          <SafeAreaView>
-            <AppBar
-              style={styles.appBar}
-              title="Accura KYC 1.0.1"
-              leading={
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setState({
-                      isMainScreen: true,
-                      isOCRScreen: false,
-                      isCardListScreen: false,
-                      isResultScreen: false,
-                      isFacematchScreen: false,
-                      isBarcodeScreen: false,
-                    });
-                  }}>
-                  <Image
-                    style={{aspectRatio: 1, width: 18}}
-                    source={require('./assets/images/backpress.png')}
-                  />
-                </TouchableOpacity>
-              }
-            />
-            <View style={{backgroundColor: '#ffffff', paddingBottom: 30}}>
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{paddingBottom: 100}}>
-                  {this.state.ocrContries.map(Country => {
-                    return (
-                      <View
-                        style={{
-                          backgroundColor: '#ffffff',
-                        }}>
-                        <TouchableOpacity
-                          onPress={() => {
-                            console.log('country selected', Country.value);
-                            if (
-                              Country.label === 'Passport' ||
-                              Country.label === 'Mrz ID' ||
-                              Country.label === 'Visa Card' ||
-                              Country.label === 'Other'
-                            ) {
-                              this.mrzSelected = Country.value;
-                              this.onPressMRZ();
-                            } else if (Country.label === 'Barcode') {
-                              this.setState({
-                                isMainScreen: false,
-                                isOCRScreen: false,
-                                isCardListScreen: false,
-                                isResultScreen: false,
-                                isFacematchScreen: false,
-                                isBarcodeScreen: true,
-                              });
-                            } else if (Country.label === 'BankCard') {
-                              this.onPressBankcard();
-                            } else {
-                              this.countrySelected =
-                                this.state.objSDKRes?.countries[Country.value];
-                              this.cardSelected = this.countrySelected.cards;
+        <ImageBackground
+          source={require('./assets/images/background.png')}
+          style={styles.backgroundView}>
+          <>
+            <SafeAreaView>
+              <AppBar
+                style={styles.appBar}
+                title="Accura KYC"
+                leading={
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({
+                        isMainScreen: true,
+                        isOCRScreen: false,
+                        isCardListScreen: false,
+                        isResultScreen: false,
+                        isFacematchScreen: false,
+                        isBarcodeScreen: false,
+                      });
+                    }}>
+                    <Image
+                      style={{aspectRatio: 1, width: 18}}
+                      source={require('./assets/images/backpress.png')}
+                    />
+                  </TouchableOpacity>
+                }
+              />
+              <View style={{paddingBottom: 30}}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  <View style={{paddingBottom: 100}}>
+                    {this.state.ocrContries.map(Country => {
+                      return (
+                        <View>
+                          <TouchableOpacity
+                            onPress={() => {
+                              console.log('country selected', Country.value);
+                              if (
+                                Country.label === 'Passport' ||
+                                Country.label === 'Mrz ID' ||
+                                Country.label === 'Visa Card' ||
+                                Country.label === 'Other'
+                              ) {
+                                this.mrzSelected = Country.value;
+                                this.onPressMRZ();
+                              } else if (Country.label === 'Barcode') {
+                                this.setState({
+                                  isMainScreen: false,
+                                  isOCRScreen: false,
+                                  isCardListScreen: false,
+                                  isResultScreen: false,
+                                  isFacematchScreen: false,
+                                  isBarcodeScreen: true,
+                                });
+                              } else if (Country.label === 'BankCard') {
+                                this.onPressBankcard();
+                              } else {
+                                this.countrySelected =
+                                  this.state.objSDKRes?.countries[
+                                    Country.value
+                                  ];
+                                this.cardSelected = this.countrySelected.cards;
 
-                              this.state.cardList = this.countrySelected.cards;
-                              this.setState({
-                                isOCRScreen: false,
-                                isCardListScreen: true,
-                              });
-                            }
-                          }}>
-                          {Country.label === 'Passport' ||
-                          Country.label === 'Mrz ID' ||
-                          Country.label === 'Visa Card' ||
-                          Country.label === 'Other' ||
-                          Country.label === 'Barcode' ||
-                          Country.label === 'BankCard' ? (
-                            <Text
-                              style={{
-                                flex: 1,
-                                backgroundColor: 'grey',
-                                color: 'white',
-                                padding: 15,
-                                margin: 5,
-                                height: 50,
-                                textAlign: 'left',
-                                borderRadius: 10,
-                                fontWeight: 'bold',
-                                overflow: 'hidden',
-                              }}>
-                              {Country.label}
-                            </Text>
-                          ) : (
-                            <Text
-                              style={{
-                                flex: 1,
-                                backgroundColor: 'red',
-                                color: 'white',
-                                padding: 15,
-                                margin: 5,
-                                height: 50,
-                                textAlign: 'left',
-                                borderRadius: 10,
-                                fontWeight: 'bold',
-                                overflow: 'hidden',
-                              }}>
-                              {Country.label}
-                            </Text>
-                          )}
-                        </TouchableOpacity>
-                      </View>
-                    );
-                  })}
-                </View>
-              </ScrollView>
-            </View>
-          </SafeAreaView>
-        </>
+                                this.state.cardList =
+                                  this.countrySelected.cards;
+                                this.setState({
+                                  isOCRScreen: false,
+                                  isCardListScreen: true,
+                                });
+                              }
+                            }}>
+                            {Country.label === 'Passport' ||
+                            Country.label === 'Mrz ID' ||
+                            Country.label === 'Visa Card' ||
+                            Country.label === 'Other' ||
+                            Country.label === 'Barcode' ||
+                            Country.label === 'BankCard' ? (
+                              <Text
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: 'grey',
+                                  color: 'white',
+                                  padding: 15,
+                                  margin: 5,
+                                  height: 50,
+                                  textAlign: 'left',
+                                  borderRadius: 10,
+                                  fontWeight: 'bold',
+                                  overflow: 'hidden',
+                                }}>
+                                {Country.label}
+                              </Text>
+                            ) : (
+                              <Text
+                                style={{
+                                  flex: 1,
+                                  backgroundColor: 'red',
+                                  color: 'white',
+                                  padding: 15,
+                                  margin: 5,
+                                  height: 50,
+                                  textAlign: 'left',
+                                  borderRadius: 10,
+                                  fontWeight: 'bold',
+                                  overflow: 'hidden',
+                                }}>
+                                {Country.label}
+                              </Text>
+                            )}
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    })}
+                  </View>
+                </ScrollView>
+              </View>
+            </SafeAreaView>
+          </>
+        </ImageBackground>
       );
     } else if (this.state.isCardListScreen) {
       return (
