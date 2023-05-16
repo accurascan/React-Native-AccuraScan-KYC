@@ -27,6 +27,7 @@ export default class App extends React.Component {
   mrzSelected = '';
   mrzCountryList = 'all';
   countrySelected = null;
+  isCard = false;
   cardSelected = null;
   barcodeSelected = '';
   result = null;
@@ -428,7 +429,6 @@ export default class App extends React.Component {
           isResultScreen: true,
           isOCRScreen: false,
           isCardListScreen: false,
-          // modalVisible: true,
         });
       }
     });
@@ -669,9 +669,9 @@ export default class App extends React.Component {
       return true;
     } else if (this.state.isResultScreen) {
       this.setState({
-        isOCRScreen: true,
+        isOCRScreen: !this.isCard,
         isMainScreen: false,
-        isCardListScreen: false,
+        isCardListScreen: this.isCard,
         isResultScreen: false,
         isFacematchScreen: false,
         isBarcodeScreen: false,
@@ -792,9 +792,11 @@ export default class App extends React.Component {
                                 Country.label === 'Visa Card' ||
                                 Country.label === 'Other'
                               ) {
+                                this.isCard = false;
                                 this.mrzSelected = Country.value;
                                 this.onPressMRZ();
                               } else if (Country.label === 'Barcode') {
+                                this.isCard = false;
                                 this.setState({
                                   isMainScreen: false,
                                   isOCRScreen: false,
@@ -804,8 +806,10 @@ export default class App extends React.Component {
                                   isBarcodeScreen: true,
                                 });
                               } else if (Country.label === 'BankCard') {
+                                this.isCard = false;
                                 this.onPressBankcard();
                               } else {
+                                this.isCard = true
                                 this.countrySelected =
                                   this.state.objSDKRes?.countries[
                                     Country.value
@@ -1133,9 +1137,9 @@ export default class App extends React.Component {
                 <TouchableOpacity
                   onPress={() => {
                     this.setState({
-                      isOCRScreen: true,
+                      isOCRScreen: !this.isCard,
                       isMainScreen: false,
-                      isCardListScreen: false,
+                      isCardListScreen: this.isCard,
                       isResultScreen: false,
                       isFacematchScreen: false,
                       isBarcodeScreen: false,
