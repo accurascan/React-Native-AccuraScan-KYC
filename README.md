@@ -17,7 +17,9 @@ OR
 `npm i accurascan_kyc`
 
 **Usage**
+
 Import npm library into file.
+
 `import AccurascanKyc from 'accurascan_kyc';`
 
 ## 1.Setup Android
@@ -87,7 +89,7 @@ $ git lfs install
 
 and comment this line `:flipper_configuration => flipper_config`
 
-take reference from [here](https://github.com/Anaslokhandwala/Accurascan_KYC/blob/master/ios/Podfile)
+take reference from [here](https://github.com/accurascan/React-Native-AccuraScan-KYC/blob/main/ios/Podfile)
 
 3.Run `pod install`
 
@@ -569,7 +571,7 @@ score: String,
 
 **Error:** String
 
-Check [App.js](https://github.com/Anaslokhandwala/Accurascan_KYC/blob/master/App.js) for a demo UI
+Check [App.js](https://github.com/accurascan/React-Native-AccuraScan-KYC/blob/main/App.js) for a demo UI
 
 License:
 MIT
