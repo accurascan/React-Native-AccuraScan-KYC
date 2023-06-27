@@ -276,7 +276,7 @@ onPressOCR = () => {
      this.cardSelected.id,     //integer
      this.cardSelected.name,   //String
      this.cardSelected.type,   //integer
-   ]; //[{"enableLogs":false},1,41,"Emirates National ID",0,"portrait-primary"]
+   ];
    //Method for start OCR scaning from native OS.
    AccurascanKyc.startOcrWithCard(passArgs, (error, response) => {
      if (error != null) {
@@ -296,7 +296,6 @@ onPressOCR = () => {
 ```
 onPressBarcode = () => {
    let passArgs = [this.barcodeSelected];
-   //Method for start MRZ scaning from native OS.
    AccurascanKyc.startBarcode(passArgs, (error, response) => {
      if (error != null) {
        console.log(error);
