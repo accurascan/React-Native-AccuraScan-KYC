@@ -82,7 +82,7 @@ export default class App extends React.Component {
     );
     LogBox.ignoreAllLogs();
     console.log('IS_ACTIVE_ACCURA_KYC:- ', AccurascanKyc.getConstants());
-    this.setUpCustomMessages();
+    
     this.getAccuraSetup();
   };
 
@@ -711,6 +711,7 @@ export default class App extends React.Component {
                     />
                     <TouchableOpacity
                       onPress={() => {
+                        this.setUpCustomMessages();
                         this.setState({
                           isOCRScreen: true,
                           isMainScreen: false,
