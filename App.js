@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {AppBar} from '@react-native-material/core';
+import { AppBar } from '@react-native-material/core';
 
 import {
   StyleSheet,
@@ -27,7 +27,6 @@ export default class App extends React.Component {
   mrzSelected = '';
   mrzCountryList = 'all';
   countrySelected = null;
-  isCard = false;
   cardSelected = null;
   barcodeSelected = '';
   result = null;
@@ -73,23 +72,22 @@ export default class App extends React.Component {
   }
 
   componentDidMount = () => {
-    const imageSource = require('./assets/images/background.png');
+    const imageSource = require('./assets/images/flip.png');
     this.flipImage = Image.resolveAssetSource(imageSource).uri;
     console.log('Image path:', this.flipImage);
     BackHandler.addEventListener(
       'hardwareBackPress',
-      this.handleBackButtonClick,
+      this.handleBackButtonClick
     );
     LogBox.ignoreAllLogs();
     console.log('IS_ACTIVE_ACCURA_KYC:- ', AccurascanKyc.getConstants());
-    
     this.getAccuraSetup();
   };
 
   componentWillUnmount() {
     BackHandler.removeEventListener(
       'hardwareBackPress',
-      this.handleBackButtonClick,
+      this.handleBackButtonClick
     );
   }
 
@@ -98,7 +96,7 @@ export default class App extends React.Component {
     var config = {
       setFaceBlurPercentage: 80,
       setHologramDetection: true,
-      setLowLightTolerance: 10,
+      setLowLightTolerance: -1,
       setMotionThreshold: 25,
       setMinGlarePercentage: 6,
       setMaxGlarePercentage: 99,
@@ -108,13 +106,14 @@ export default class App extends React.Component {
 
     var accuraConfigs = {
       flipImage: this.flipImage,
-      enableLogs: 1,
-      setCameraFacing: 0,
-      isShowLogo: 1,
-      isFlipImg: 1,
       CameraScreen_CornerBorder_Enable: false,
-      CameraScreen_Border_Width: 15,
+      CameraScreen_Border_Width: 10,
       Disable_Card_Name: false,
+      enableLogs: 0,
+      setCameraFacing: 0,
+      isShowLogo: 0,
+      isFlipImg: 1,
+      CameraScreen_Label_Text_Size: 16,
       CameraScreen_Frame_Color: '#D5323F',
       CameraScreen_Text_Color: '#FFFFFF',
       CameraScreen_Text_Border_Color: '#000000',
@@ -162,7 +161,7 @@ export default class App extends React.Component {
         } else {
           console.log('Message:- ', response);
         }
-      },
+      }
     );
   };
 
@@ -172,7 +171,7 @@ export default class App extends React.Component {
     AccurascanKyc.getMetaData((error, response) => {
       if (error != null) {
         console.log('Failur!', error);
-        this.setState({isLoading: false});
+        this.setState({ isLoading: false });
       } else {
         console.log('JSON:- ', response);
         const res = this.getResultJSON(response);
@@ -182,36 +181,45 @@ export default class App extends React.Component {
         if (res?.isMRZ) {
           newContries = [
             ...newContries,
-            {label: 'Passport', value: 'passport_mrz'},
-            {label: 'Mrz ID', value: 'id_mrz'},
-            {label: 'Visa Card', value: 'visa_card'},
-            {label: 'Other', value: 'other_mrz'},
+            { label: 'Passport', value: 'passport_mrz' },
+            { label: 'Mrz ID', value: 'id_mrz' },
+            { label: 'Visa Card', value: 'visa_card' },
+            { label: 'Other', value: 'other_mrz' },
+          ];
+        }
+        if (res?.isSchengen) {
+          newContries = [
+            ...newContries,
+            { label: 'Schengen Visa', value: 'schengen_visa' },
           ];
         }
 
         if (res?.isBarcode) {
-          newContries = [...newContries, {label: 'Barcode', value: 'Barcode'}];
+          newContries = [
+            ...newContries,
+            { label: 'Barcode', value: 'Barcode' },
+          ];
         }
 
         if (res?.isBankCard) {
           newContries = [
             ...newContries,
-            {label: 'BankCard', value: 'BankCard'},
+            { label: 'BankCard', value: 'BankCard' },
           ];
         }
 
         res?.countries?.map(
-          item =>
-            (newContries = [...newContries, {label: item.name, value: a++}]),
+          (item) =>
+            (newContries = [...newContries, { label: item.name, value: a++ }])
         );
 
         var newBarcodeTypes = [];
         res?.barcodes?.map(
-          item =>
+          (item) =>
             (newBarcodeTypes = [
               ...newBarcodeTypes,
-              {label: item.name, value: item.type},
-            ]),
+              { label: item.name, value: item.type },
+            ])
         );
         this.setState({
           objSDKRes: res,
@@ -260,14 +268,15 @@ export default class App extends React.Component {
   };
 
   onPressOCR = () => {
+    this.result = null;
     var isValid = true;
     if (this.countrySelected === null || this.countrySelected === '') {
-      this.setState({isValidCountry: false});
+      this.setState({ isValidCountry: false });
       isValid = false;
     }
 
     if (this.cardSelected === null || this.cardSelected === '') {
-      this.setState({isValidCard: false});
+      this.setState({ isValidCard: false });
       isValid = false;
     }
 
@@ -285,6 +294,31 @@ export default class App extends React.Component {
           this.showAlert('Failure!', error);
         } else {
           const res = this.getResultJSON(response);
+          // this.result = res;
+          this.setState({
+            isResultScreen: true,
+            isMainScreen: false,
+            isOCRScreen: false,
+            isCardListScreen: false,
+            isFacematchScreen: false,
+            isBarcodeScreen: false,
+            objScanRes: res,
+          });
+          if(this.countrySelected.id == 9 || this.countrySelected.id == 26){
+            this.getArabicApi(this.countrySelected.id,res, (Result) => {
+              console.log(Result); // Handle the result here
+              this.result = Result;
+              this.setState({
+                isResultScreen: true,
+                isMainScreen: false,
+                isOCRScreen: false,
+                isCardListScreen: false,
+                isFacematchScreen: false,
+                isBarcodeScreen: false,
+                objScanRes: res,
+              });
+            });
+          }else{
           this.result = res;
           this.setState({
             isResultScreen: true,
@@ -295,15 +329,66 @@ export default class App extends React.Component {
             isBarcodeScreen: false,
             objScanRes: res,
           });
+          }
+
+
         }
       });
     }
   };
 
+  getArabicApi = (id,res, callback) => {
+    const formdata = new FormData();
+    var countryCode = "";
+    if(id == 9){
+      countryCode = "KWT";
+    }
+    if(id == 26){
+      countryCode = "BHR";
+    }
+    formdata.append("country_code", countryCode);
+  
+    // Create a file object
+    const file = {
+      uri: res.front_img,
+      type: 'image/jpeg', // or the appropriate MIME type for your file
+      name: res.front_img.split('/').pop()
+    };
+    formdata.append("file", file);
+  
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://110.5.77.162:8005/api_all.php");
+  
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          const responseJson = JSON.parse(xhr.responseText);
+  
+          const existingFrontData = res.front_data || {}; // Ensure existingFrontData is an object
+  
+          // Merge existing data with responseJson.data.OCRData
+          const updatedFrontData = { ...existingFrontData, ...responseJson.data.OCRdata };
+  
+          // Update Result.front_data with the merged data
+          res.front_data = updatedFrontData;
+  
+
+  
+          // Invoke the callback with the result
+          callback(res);
+        } else {
+          console.error('Upload failed with status:', xhr.status);
+        }
+      }
+    };
+  
+    xhr.send(formdata);
+  };
+
   onPressBarcode = () => {
     var isValid = true;
     if (this.barcodeSelected?.toString() === '') {
-      this.setState({isValidBarcodeType: false});
+      this.setState({ isValidBarcodeType: false });
       isValid = false;
     }
 
@@ -337,6 +422,7 @@ export default class App extends React.Component {
     };
 
     var lconfig = {
+      setDefaultText:"Keep face In Frame \n Face Must Be Near To Camera",
       backGroundColor: '#FFC4C4C5',
       closeIconColor: '#FF000000',
       feedbackBackGroundColor: '#FFC4C4C5',
@@ -354,12 +440,11 @@ export default class App extends React.Component {
       setBlurPercentage: 80,
       setGlarePercentage_0: -1,
       setGlarePercentage_1: -1,
-      setLivenessURL: 'your url',
+      setLivenessURL: '',
       setFeedBackLowLightMessage: 'Low light detected',
       feedbackLowLightTolerence: 39,
       feedbackDialogMessage: 'Loading...',
       feedBackProcessingMessage: 'Processing...',
-      isShowLogo: 1,
     };
 
     let passArgs = [accuraConfs, lconfig];
@@ -368,7 +453,7 @@ export default class App extends React.Component {
       if (error != null) {
         console.log('Failure!', error);
         this.showAlert('Failure!', error);
-        this.setState({modalVisible: true});
+        this.setState({ modalVisible: true });
       } else {
         const res = this.getResultJSON(response);
         this.setState({
@@ -381,6 +466,7 @@ export default class App extends React.Component {
           isCardListScreen: false,
           isFacematchScreen: false,
           isBarcodeScreen: false,
+          // modalVisible: true,
         });
       }
     });
@@ -411,7 +497,6 @@ export default class App extends React.Component {
       setGlarePercentage_1: -1,
       feedbackDialogMessage: 'Loading...',
       feedBackProcessingMessage: 'Processing...',
-      isShowLogo: 1,
     };
     let passArgs = [accuraConfs, fconfig];
 
@@ -419,7 +504,7 @@ export default class App extends React.Component {
       if (error != null) {
         console.log('Failur!', error);
         this.showAlert('Failur!', error);
-        this.setState({modalVisible: true});
+        this.setState({ modalVisible: true });
       } else {
         const res = this.getResultJSON(response);
         this.setState({
@@ -429,6 +514,7 @@ export default class App extends React.Component {
           isResultScreen: true,
           isOCRScreen: false,
           isCardListScreen: false,
+          // modalVisible: true,
         });
       }
     });
@@ -460,7 +546,6 @@ export default class App extends React.Component {
       setGlarePercentage_1: -1,
       feedbackDialogMessage: 'Loading...',
       feedBackProcessingMessage: 'Processing...',
-      isShowLogo: 1,
     };
     let passArgs = [accuraConfs, fconfig];
 
@@ -468,7 +553,7 @@ export default class App extends React.Component {
       if (error != null) {
         console.log('Failure!', error);
         this.showAlert('Failure!', error);
-        this.setState({fmmodalViseble: true});
+        this.setState({ fmmodalViseble: true });
       } else {
         const res = this.getResultJSON(response);
         this.setState({
@@ -506,7 +591,6 @@ export default class App extends React.Component {
       setGlarePercentage_1: -1,
       feedbackDialogMessage: 'Loading...',
       feedBackProcessingMessage: 'Processing...',
-      isShowLogo: 1,
     };
     let passArgs = [accuraConfs, fconfig];
 
@@ -514,7 +598,7 @@ export default class App extends React.Component {
       if (error != null) {
         console.log('Failure!', error);
         this.showAlert('Failure!', error);
-        this.setState({fmmodalViseble: true});
+        this.setState({ fmmodalViseble: true });
       } else {
         const res = this.getResultJSON(response);
         this.setState({
@@ -536,7 +620,7 @@ export default class App extends React.Component {
       if (error != null) {
         console.log('Failure!', error);
         this.showAlert('Failure!', error);
-        this.setState({fmmodalViseble: true});
+        this.setState({ fmmodalViseble: true });
       } else {
         const res = this.getResultJSON(response);
         this.setState({
@@ -558,7 +642,7 @@ export default class App extends React.Component {
       if (error != null) {
         console.log('Failure!', error);
         this.showAlert('Failure!', error);
-        this.setState({fmmodalViseble: true});
+        this.setState({ fmmodalViseble: true });
       } else {
         const res = this.getResultJSON(response);
         this.setState({
@@ -573,7 +657,7 @@ export default class App extends React.Component {
   onPressMRZ = () => {
     var isValid = true;
     if (this.mrzSelected === '' || this.mrzSelected === null) {
-      this.setState({isValidType: false});
+      this.setState({ isValidType: false });
       isValid = false;
     }
 
@@ -600,7 +684,7 @@ export default class App extends React.Component {
     }
   };
 
-  getResultJSON = jsonString => {
+  getResultJSON = (jsonString) => {
     var json;
     try {
       // eslint-disable-next-line no-eval
@@ -646,9 +730,9 @@ export default class App extends React.Component {
       return true;
     } else if (this.state.isBarcodeScreen) {
       this.setState({
-        isOCRScreen: false,
+        isOCRScreen: true,
         isMainScreen: false,
-        isCardListScreen: true,
+        isCardListScreen: false,
         isResultScreen: false,
         isFacematchScreen: false,
         isBarcodeScreen: false,
@@ -669,9 +753,9 @@ export default class App extends React.Component {
       return true;
     } else if (this.state.isResultScreen) {
       this.setState({
-        isOCRScreen: !this.isCard,
+        isOCRScreen: true,
         isMainScreen: false,
-        isCardListScreen: this.isCard,
+        isCardListScreen: false,
         isResultScreen: false,
         isFacematchScreen: false,
         isBarcodeScreen: false,
@@ -690,14 +774,16 @@ export default class App extends React.Component {
       return (
         <ImageBackground
           source={require('./assets/images/background.png')}
-          style={styles.backgroundView}>
+          style={styles.backgroundView}
+        >
           {this.state.isLoading ? (
             <View
               style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-              }}>
+              }}
+            >
               <ActivityIndicator size="large" color="#d32d38" />
             </View>
           ) : (
@@ -720,7 +806,8 @@ export default class App extends React.Component {
                           isFacematchScreen: false,
                           isBarcodeScreen: false,
                         });
-                      }}>
+                      }}
+                    >
                       <Image
                         source={require('./assets/images/OCR.jpg')}
                         style={styles.FirstView}
@@ -736,7 +823,8 @@ export default class App extends React.Component {
                           isResultScreen: false,
                           isBarcodeScreen: false,
                         });
-                      }}>
+                      }}
+                    >
                       <Image
                         source={require('./assets/images/Facematch.jpg')}
                         style={styles.FirstView}
@@ -753,7 +841,8 @@ export default class App extends React.Component {
       return (
         <ImageBackground
           source={require('./assets/images/background.png')}
-          style={styles.backgroundView}>
+          style={styles.backgroundView}
+        >
           <>
             <SafeAreaView>
               <AppBar
@@ -770,20 +859,21 @@ export default class App extends React.Component {
                         isFacematchScreen: false,
                         isBarcodeScreen: false,
                       });
-                    }}>
+                    }}
+                  >
                     <Image
-                      style={{aspectRatio: 1, width: 18}}
+                      style={{ aspectRatio: 1, width: 18 }}
                       source={require('./assets/images/backpress.png')}
                     />
                   </TouchableOpacity>
                 }
               />
-              <View style={{paddingBottom: 30}}>
+              <View style={{ paddingBottom: 30 }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                  <View style={{paddingBottom: 100}}>
-                    {this.state.ocrContries.map(Country => {
+                  <View style={{ paddingBottom: 100 }}>
+                    {this.state.ocrContries.map((Country) => {
                       return (
-                        <View>
+                        <View key={Country.id}>
                           <TouchableOpacity
                             onPress={() => {
                               console.log('country selected', Country.value);
@@ -791,13 +881,12 @@ export default class App extends React.Component {
                                 Country.label === 'Passport' ||
                                 Country.label === 'Mrz ID' ||
                                 Country.label === 'Visa Card' ||
-                                Country.label === 'Other'
+                                Country.label === 'Other' ||
+                                Country.label == "Schengen Visa"
                               ) {
-                                this.isCard = false;
                                 this.mrzSelected = Country.value;
                                 this.onPressMRZ();
                               } else if (Country.label === 'Barcode') {
-                                this.isCard = false;
                                 this.setState({
                                   isMainScreen: false,
                                   isOCRScreen: false,
@@ -807,10 +896,8 @@ export default class App extends React.Component {
                                   isBarcodeScreen: true,
                                 });
                               } else if (Country.label === 'BankCard') {
-                                this.isCard = false;
                                 this.onPressBankcard();
                               } else {
-                                this.isCard = true
                                 this.countrySelected =
                                   this.state.objSDKRes?.countries[
                                     Country.value
@@ -824,12 +911,14 @@ export default class App extends React.Component {
                                   isCardListScreen: true,
                                 });
                               }
-                            }}>
+                            }}
+                          >
                             {Country.label === 'Passport' ||
                             Country.label === 'Mrz ID' ||
                             Country.label === 'Visa Card' ||
                             Country.label === 'Other' ||
                             Country.label === 'Barcode' ||
+                            Country.label == 'Schengen Visa' ||
                             Country.label === 'BankCard' ? (
                               <Text
                                 style={{
@@ -843,7 +932,8 @@ export default class App extends React.Component {
                                   borderRadius: 10,
                                   fontWeight: 'bold',
                                   overflow: 'hidden',
-                                }}>
+                                }}
+                              >
                                 {Country.label}
                               </Text>
                             ) : (
@@ -859,7 +949,8 @@ export default class App extends React.Component {
                                   borderRadius: 10,
                                   fontWeight: 'bold',
                                   overflow: 'hidden',
-                                }}>
+                                }}
+                              >
                                 {Country.label}
                               </Text>
                             )}
@@ -892,9 +983,10 @@ export default class App extends React.Component {
                       isBarcodeScreen: false,
                       isOCRScreen: true,
                     });
-                  }}>
+                  }}
+                >
                   <Image
-                    style={{aspectRatio: 1, width: 18}}
+                    style={{ aspectRatio: 1, width: 18 }}
                     source={require('./assets/images/backpress.png')}
                   />
                 </TouchableOpacity>
@@ -902,24 +994,26 @@ export default class App extends React.Component {
             />
           </SafeAreaView>
 
-          <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+          <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <ScrollView showsVerticalScrollIndicator={false}>
               {/* <View
                 style={{ flex: 1, padding: 20, backgroundColor: '#ffffff' }}
               > */}
-              {this.cardSelected.map(Cards => {
+              {this.cardSelected.map((Cards) => {
                 return (
                   <View
                     style={{
                       backgroundColor: '#ffffff',
-                    }}>
+                    }}
+                  >
                     <TouchableOpacity
                       onPress={() => {
                         this.cardSelected.id = Cards.id;
                         this.cardSelected.name = Cards.name;
                         this.cardSelected.type = Cards.type;
                         this.onPressOCR();
-                      }}>
+                      }}
+                    >
                       <Text
                         style={{
                           flex: 1,
@@ -932,7 +1026,8 @@ export default class App extends React.Component {
                           height: 50,
                           textAlign: 'left',
                           overflow: 'hidden',
-                        }}>
+                        }}
+                      >
                         {Cards.name}
                       </Text>
                     </TouchableOpacity>
@@ -966,9 +1061,10 @@ export default class App extends React.Component {
                       fm_score: 0.0,
                       lv_score: 0.0,
                     });
-                  }}>
+                  }}
+                >
                   <Image
-                    style={{aspectRatio: 1, width: 18}}
+                    style={{ aspectRatio: 1, width: 18 }}
                     source={require('./assets/images/backpress.png')}
                   />
                 </TouchableOpacity>
@@ -976,7 +1072,7 @@ export default class App extends React.Component {
             />
           </SafeAreaView>
 
-          <View style={{flex: 1, padding: 20, backgroundColor: '#00000066'}}>
+          <View style={{ flex: 1, padding: 20, backgroundColor: '#00000066' }}>
             <View style={styles.modelFace}>
               <View
                 style={{
@@ -984,14 +1080,15 @@ export default class App extends React.Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                   flexDirection: 'row',
-                }}>
+                }}
+              >
                 <Image
                   style={styles.faceImageView}
-                  source={{uri: this.state.FirstFMImageURI}}
+                  source={{ uri: this.state.FirstFMImageURI }}
                 />
                 <Image
-                  style={[styles.faceImageView, {marginLeft: 50}]}
-                  source={{uri: this.state.SecondFMImageURI}}
+                  style={[styles.faceImageView, { marginLeft: 50 }]}
+                  source={{ uri: this.state.SecondFMImageURI }}
                 />
               </View>
               <View
@@ -1001,16 +1098,18 @@ export default class App extends React.Component {
                   flexDirection: 'row',
                   marginVertical: 10,
                   justifyContent: 'space-around',
-                }}>
+                }}
+              >
                 <TouchableOpacity
                   style={{}}
                   onPress={() => {
-                    this.setState({modalVisible: false});
+                    this.setState({ modalVisible: false });
                     this.onPressFaceMatch1();
-                  }}>
+                  }}
+                >
                   <View style={styles.btnView}>
                     <Image
-                      style={{aspectRatio: 1, width: 18}}
+                      style={{ aspectRatio: 1, width: 18 }}
                       source={require('./assets/images/cam.png')}
                     />
                     <Text
@@ -1018,7 +1117,8 @@ export default class App extends React.Component {
                         color: 'white',
                         fontSize: 15,
                         marginLeft: 5,
-                      }}>
+                      }}
+                    >
                       Camera
                     </Text>
                   </View>
@@ -1026,12 +1126,13 @@ export default class App extends React.Component {
                 <TouchableOpacity
                   style={{}}
                   onPress={() => {
-                    this.setState({modalVisible: false});
+                    this.setState({ modalVisible: false });
                     this.onPressFaceMatch2();
-                  }}>
+                  }}
+                >
                   <View style={styles.btnView}>
                     <Image
-                      style={{aspectRatio: 1, width: 18}}
+                      style={{ aspectRatio: 1, width: 18 }}
                       source={require('./assets/images/cam.png')}
                     />
                     <Text
@@ -1039,7 +1140,8 @@ export default class App extends React.Component {
                         color: 'white',
                         fontSize: 15,
                         marginLeft: 5,
-                      }}>
+                      }}
+                    >
                       Camera
                     </Text>
                   </View>
@@ -1052,16 +1154,18 @@ export default class App extends React.Component {
                   flexDirection: 'row',
                   marginVertical: 10,
                   justifyContent: 'space-around',
-                }}>
+                }}
+              >
                 <TouchableOpacity
                   style={{}}
                   onPress={() => {
-                    this.setState({modalVisible: false});
+                    this.setState({ modalVisible: false });
                     this.openGallery();
-                  }}>
+                  }}
+                >
                   <View style={styles.btnView}>
                     <Image
-                      style={{aspectRatio: 1, width: 18}}
+                      style={{ aspectRatio: 1, width: 18 }}
                       source={require('./assets/images/gallery.png')}
                     />
                     <Text
@@ -1069,7 +1173,8 @@ export default class App extends React.Component {
                         color: 'white',
                         fontSize: 15,
                         marginLeft: 5,
-                      }}>
+                      }}
+                    >
                       Gallery
                     </Text>
                   </View>
@@ -1077,12 +1182,13 @@ export default class App extends React.Component {
                 <TouchableOpacity
                   style={{}}
                   onPress={() => {
-                    this.setState({modalVisible: false});
+                    this.setState({ modalVisible: false });
                     this.openGallery2();
-                  }}>
+                  }}
+                >
                   <View style={styles.btnView}>
                     <Image
-                      style={{aspectRatio: 1, width: 18}}
+                      style={{ aspectRatio: 1, width: 18 }}
                       source={require('./assets/images/gallery.png')}
                     />
                     <Text
@@ -1090,7 +1196,8 @@ export default class App extends React.Component {
                         color: 'white',
                         fontSize: 15,
                         marginLeft: 5,
-                      }}>
+                      }}
+                    >
                       Gallery
                     </Text>
                   </View>
@@ -1103,13 +1210,15 @@ export default class App extends React.Component {
                   flexDirection: 'row',
                   marginBottom: 10,
                   justifyContent: 'space-around',
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     fontSize: 15,
                     fontWeight: 'bold',
                     color: '#000000',
-                  }}>
+                  }}
+                >
                   {this.state.fm_score != null
                     ? parseInt(this.state.fm_score).toFixed(2) + '%'
                     : '0.00%'}
@@ -1121,7 +1230,11 @@ export default class App extends React.Component {
       );
     } else if (this.state.isResultScreen) {
       if (this.result === undefined || this.result === null) {
-        return;
+        return (
+          <View style={styles.container1}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+        );
       }
 
       if (this.result.hasOwnProperty('face')) {
@@ -1138,9 +1251,9 @@ export default class App extends React.Component {
                 <TouchableOpacity
                   onPress={() => {
                     this.setState({
-                      isOCRScreen: !this.isCard,
+                      isOCRScreen: true,
                       isMainScreen: false,
-                      isCardListScreen: this.isCard,
+                      isCardListScreen: false,
                       isResultScreen: false,
                       isFacematchScreen: false,
                       isBarcodeScreen: false,
@@ -1148,23 +1261,25 @@ export default class App extends React.Component {
                       lv_score: 0.0,
                       secondImageURI: '',
                     });
-                  }}>
+                  }}
+                >
                   <Image
-                    style={{aspectRatio: 1, width: 18}}
+                    style={{ aspectRatio: 1, width: 18 }}
                     source={require('./assets/images/backpress.png')}
                   />
                 </TouchableOpacity>
               }
             />
           </SafeAreaView>
-          <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+          <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <View
                 style={{
                   backgroundColor: 'white',
                   padding: 20,
                   flex: 1,
-                }}>
+                }}
+              >
                 {this.result.hasOwnProperty('face') ? (
                   <View style={styles.modelFace}>
                     <View
@@ -1173,15 +1288,16 @@ export default class App extends React.Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'row',
-                      }}>
+                      }}
+                    >
                       <Image
                         style={styles.faceImageView}
-                        source={{uri: this.result?.face}}
+                        source={{ uri: this.result?.face }}
                       />
                       {this.state.secondImageURI !== '' ? (
                         <Image
-                          style={[styles.faceImageView, {marginLeft: 50}]}
-                          source={{uri: this.state.secondImageURI}}
+                          style={[styles.faceImageView, { marginLeft: 50 }]}
+                          source={{ uri: this.state.secondImageURI }}
                         />
                       ) : (
                         <View />
@@ -1194,16 +1310,18 @@ export default class App extends React.Component {
                         flexDirection: 'row',
                         marginVertical: 10,
                         justifyContent: 'space-around',
-                      }}>
+                      }}
+                    >
                       <TouchableOpacity
                         style={{}}
                         onPress={() => {
-                          this.setState({modalVisible: false});
+                          this.setState({ modalVisible: false });
                           this.onPressStartLiveness();
-                        }}>
+                        }}
+                      >
                         <View style={styles.btnView}>
                           <Image
-                            style={{aspectRatio: 1, width: 18}}
+                            style={{ aspectRatio: 1, width: 18 }}
                             source={require('./assets/images/ic_liveness.png')}
                           />
                           <Text
@@ -1211,7 +1329,8 @@ export default class App extends React.Component {
                               color: 'white',
                               fontSize: 15,
                               marginLeft: 5,
-                            }}>
+                            }}
+                          >
                             LIVENESS
                           </Text>
                         </View>
@@ -1219,12 +1338,13 @@ export default class App extends React.Component {
                       <TouchableOpacity
                         style={{}}
                         onPress={() => {
-                          this.setState({modalVisible: false});
+                          this.setState({ modalVisible: false });
                           this.onPressFaceMatch();
-                        }}>
+                        }}
+                      >
                         <View style={styles.btnView}>
                           <Image
-                            style={{aspectRatio: 1, width: 18}}
+                            style={{ aspectRatio: 1, width: 18 }}
                             source={require('./assets/images/ic_biometric.png')}
                           />
                           <Text
@@ -1232,7 +1352,8 @@ export default class App extends React.Component {
                               color: 'white',
                               fontSize: 15,
                               marginLeft: 5,
-                            }}>
+                            }}
+                          >
                             FACE MATCH
                           </Text>
                         </View>
@@ -1245,13 +1366,15 @@ export default class App extends React.Component {
                         flexDirection: 'row',
                         marginBottom: 10,
                         justifyContent: 'space-around',
-                      }}>
+                      }}
+                    >
                       <Text
                         style={{
                           fontSize: 15,
                           fontWeight: 'bold',
                           color: '#000000',
-                        }}>
+                        }}
+                      >
                         {parseInt(this.state.lv_score).toFixed(2) + '%'}
                       </Text>
                       <Text
@@ -1259,7 +1382,8 @@ export default class App extends React.Component {
                           fontSize: 15,
                           fontWeight: 'bold',
                           color: '#000000',
-                        }}>
+                        }}
+                      >
                         {parseInt(this.state.fm_score).toFixed(2) + '%'}
                       </Text>
                     </View>
@@ -1268,7 +1392,7 @@ export default class App extends React.Component {
                   <View />
                 )}
 
-                <View style={{marginTop: -20}}>
+                <View style={{ marginTop: -20 }}>
                   {sides.map((side, index) => {
                     return (
                       <View key={index.toString()}>
@@ -1278,14 +1402,16 @@ export default class App extends React.Component {
                               {index === 0 ? (
                                 <View style={styles.dataHeader}>
                                   <Text
-                                    style={{fontSize: 18, fontWeight: 'bold'}}>
+                                    style={{ fontSize: 18, fontWeight: 'bold' }}
+                                  >
                                     {this.getResultType(this.result?.type)}
                                   </Text>
                                 </View>
                               ) : (
                                 <View style={styles.dataHeader}>
                                   <Text
-                                    style={{fontSize: 18, fontWeight: 'bold'}}>
+                                    style={{ fontSize: 18, fontWeight: 'bold' }}
+                                  >
                                     {'OCR Back'}
                                   </Text>
                                 </View>
@@ -1343,7 +1469,7 @@ export default class App extends React.Component {
                                       )}
                                     </View>
                                   );
-                                },
+                                }
                               )}
                             </View>
                           ) : (
@@ -1359,7 +1485,7 @@ export default class App extends React.Component {
                     Object.keys(this.result.mrz_data).length > 0 ? (
                       <>
                         <View style={styles.dataHeader}>
-                          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
                             {'MRZ'}
                           </Text>
                         </View>
@@ -1367,7 +1493,8 @@ export default class App extends React.Component {
                           return (
                             <View
                               style={styles.dataItem}
-                              key={index.toString()}>
+                              key={index.toString()}
+                            >
                               <Text style={styles.lblDataTitle}>
                                 {this.getMRZLable(key)}
                               </Text>
@@ -1388,14 +1515,14 @@ export default class App extends React.Component {
                 {this.result.hasOwnProperty('front_img') ? (
                   <View>
                     <View style={styles.dataHeader}>
-                      <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
                         {'FRONT SIDE'}
                       </Text>
                     </View>
-                    <View style={{marginVertical: 10, borderRadius: 10}}>
+                    <View style={{ marginVertical: 10, borderRadius: 10 }}>
                       <Image
                         style={styles.cardImage}
-                        source={{uri: this.result.front_img}}
+                        source={{ uri: this.result.front_img }}
                       />
                     </View>
                   </View>
@@ -1406,14 +1533,14 @@ export default class App extends React.Component {
                 {this.result.hasOwnProperty('back_img') ? (
                   <View>
                     <View style={styles.dataHeader}>
-                      <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
                         {'BACK SIDE'}
                       </Text>
                     </View>
-                    <View style={{marginVertical: 10, borderRadius: 10}}>
+                    <View style={{ marginVertical: 10, borderRadius: 10 }}>
                       <Image
                         style={styles.cardImage}
-                        source={{uri: this.result.back_img}}
+                        source={{ uri: this.result.back_img }}
                       />
                     </View>
                   </View>
@@ -1443,9 +1570,10 @@ export default class App extends React.Component {
                       isBarcodeScreen: false,
                       isOCRScreen: true,
                     });
-                  }}>
+                  }}
+                >
                   <Image
-                    style={{aspectRatio: 1, width: 18}}
+                    style={{ aspectRatio: 1, width: 18 }}
                     source={require('./assets/images/backpress.png')}
                   />
                 </TouchableOpacity>
@@ -1453,12 +1581,12 @@ export default class App extends React.Component {
             />
           </SafeAreaView>
 
-          <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+          <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <ScrollView showsVerticalScrollIndicator={false}>
               {/* <View
                 style={{ flex: 1, padding: 20, backgroundColor: '#ffffff' }}
               > */}
-              {this.state.barcodeTypes.map(Cards => {
+              {this.state.barcodeTypes.map((Cards) => {
                 return (
                   <View>
                     <TouchableOpacity
@@ -1466,7 +1594,8 @@ export default class App extends React.Component {
                         console.log(Cards);
                         this.barcodeSelected = Cards.value;
                         this.onPressBarcode();
-                      }}>
+                      }}
+                    >
                       <Text
                         style={{
                           flex: 1,
@@ -1479,7 +1608,8 @@ export default class App extends React.Component {
                           height: 50,
                           textAlign: 'left',
                           overflow: 'hidden',
-                        }}>
+                        }}
+                      >
                         {Cards.label}
                       </Text>
                     </TouchableOpacity>
@@ -1493,7 +1623,7 @@ export default class App extends React.Component {
       );
     }
   }
-  getResultType = type => {
+  getResultType = (type) => {
     switch (type) {
       case 'BANKCARD':
         return 'Bank Card Data';
@@ -1514,7 +1644,7 @@ export default class App extends React.Component {
     }
   };
 
-  getMRZLable = key => {
+  getMRZLable = (key) => {
     var lableText = '';
     switch (key) {
       case 'lines':
@@ -1614,7 +1744,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignItems: 'center',
   },
-
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   appBar: {
     padding: 5,
     backgroundColor: 'red',

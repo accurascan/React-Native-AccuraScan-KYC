@@ -12,9 +12,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		18E307E92C01E50200089396 /* key.license in Resources */ = {isa = PBXBuildFile; fileRef = 18E307E82C01E50200089396 /* key.license */; };
 		2265EBAD826E6D5EEC63BE02 /* Pods_Accurascan_KYC_Accurascan_KYCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A0F5BF6DD420538B4B5E89 /* Pods_Accurascan_KYC_Accurascan_KYCTests.framework */; };
 		6688D98829F7ADA200EE1699 /* accuraface.license in Resources */ = {isa = PBXBuildFile; fileRef = 6688D98629F7ADA200EE1699 /* accuraface.license */; };
-		6688D98929F7ADA200EE1699 /* key.license in Resources */ = {isa = PBXBuildFile; fileRef = 6688D98729F7ADA200EE1699 /* key.license */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -38,11 +38,11 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Accurascan_KYC/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Accurascan_KYC/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Accurascan_KYC/main.m; sourceTree = "<group>"; };
+		18E307E82C01E50200089396 /* key.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = key.license; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Accurascan_KYC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accurascan_KYC.debug.xcconfig"; path = "Target Support Files/Pods-Accurascan_KYC/Pods-Accurascan_KYC.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Accurascan_KYC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accurascan_KYC.release.xcconfig"; path = "Target Support Files/Pods-Accurascan_KYC/Pods-Accurascan_KYC.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Accurascan_KYC-Accurascan_KYCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accurascan_KYC-Accurascan_KYCTests.debug.xcconfig"; path = "Target Support Files/Pods-Accurascan_KYC-Accurascan_KYCTests/Pods-Accurascan_KYC-Accurascan_KYCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6688D98629F7ADA200EE1699 /* accuraface.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = accuraface.license; sourceTree = "<group>"; };
-		6688D98729F7ADA200EE1699 /* key.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = key.license; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Accurascan_KYC/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82A0F5BF6DD420538B4B5E89 /* Pods_Accurascan_KYC_Accurascan_KYCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accurascan_KYC_Accurascan_KYCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Accurascan_KYC-Accurascan_KYCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accurascan_KYC-Accurascan_KYCTests.release.xcconfig"; path = "Target Support Files/Pods-Accurascan_KYC-Accurascan_KYCTests/Pods-Accurascan_KYC-Accurascan_KYCTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,8 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				18E307E82C01E50200089396 /* key.license */,
 				6688D98629F7ADA200EE1699 /* accuraface.license */,
-				6688D98729F7ADA200EE1699 /* key.license */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -248,8 +248,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E307E92C01E50200089396 /* key.license in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				6688D98929F7ADA200EE1699 /* key.license in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				6688D98829F7ADA200EE1699 /* accuraface.license in Resources */,
 			);
@@ -272,7 +272,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+			shellScript = "set -e\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
 		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

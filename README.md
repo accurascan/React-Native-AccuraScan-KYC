@@ -10,11 +10,11 @@ Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
 
-`yarn add 'accurascan_kyc'`
+`yarn add 'accurascan_kyc@1.2.4-KYC'`
 
 OR
 
-`npm i accurascan_kyc`
+`npm i accurascan_kyc@1.2.4-KYC`
 
 **Usage**
 
@@ -64,13 +64,6 @@ packagingOptions {
    pickFirst 'lib/x86_64/libcrypto.so'
    pickFirst 'lib/x86_64/libssl.so'
 
-}
-splits {
-  abi {
-    ...
-    enable true
-    include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-  }
  }
 }
 ```
@@ -293,40 +286,56 @@ onPressOCR = () => {
 **Success:** JSON Response
 **Error:** String
 
-## 7.Method for scan barcode.
-
+## 7. Method for Arabic details via API.
 ```
-onPressBarcode = () => {
-   let passArgs = [this.barcodeSelected];
-   AccurascanKyc.startBarcode(passArgs, (error, response) => {
-     if (error != null) {
-       console.log(error);
-     } else {
-       console.log('Success!', response);
-     }
-   });
-};
-```
+    getArabicApi = (id,res, callback) => {
+      const formdata = new FormData();
+      var countryCode = "";
+      if(id == 9){
+        countryCode = "KWT"; // Country code for Kuwait
+      }
+      if(id == 26){
+        countryCode = "BHR"; // Country code for Bahrain
+      }
+      formdata.append("country_code", countryCode); 
+    
+      // Create a file object
+      const file = {
+        uri: res.front_img,
+        type: 'image/jpeg', // or the appropriate MIME type for your file
+        name: res.front_img.split('/').pop()
+      };
+      formdata.append("file", file);
+    
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "Your OCR API");
+    
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            const responseJson = JSON.parse(xhr.responseText);
+    
+            const existingFrontData = res.front_data || {}; // Ensure existingFrontData is an object
+    
+            // Merge existing data with responseJson.data.OCRData
+            const updatedFrontData = { ...existingFrontData, ...responseJson.data.OCRdata };
+    
+            // Update Result.front_data with the merged data
+            res.front_data = updatedFrontData;
+    
 
-**Success:** JSON Response
-**Error:** String
-
-## 8.Method for scan bankcard.
-
-```
-onPressBankcard = () => {
- AccurascanKyc.startBankCard((error, response) => {
-   if (error != null) {
-     console.log(error);
-   } else {
-      console.log('Success!', response);
-   }
- });
-};
-```
-
-**Success:** JSON Response
-**Error:** String
+    
+            // Invoke the callback with the result
+            callback(res);
+          } else {
+            console.error('Upload failed with status:', xhr.status);
+          }
+        }
+      };
+    
+      xhr.send(formdata);
+    };
+  ```
 
 ## 8.Method for get face match percentages between two face.
 
