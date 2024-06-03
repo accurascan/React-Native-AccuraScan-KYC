@@ -108,7 +108,7 @@ take reference from [here](https://github.com/accurascan/React-Native-AccuraScan
 
 ## 3.Setup Accura Scan licenses into your projects
 
-Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from [here](https://accurascan.com/developer/dashboard) using your bundle id.
+Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from [here](https://sandbox.accurascan.com/) using your bundle id.
 
 **key.license**
 
