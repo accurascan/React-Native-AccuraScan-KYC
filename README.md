@@ -108,7 +108,7 @@ take reference from [here](https://github.com/accurascan/React-Native-AccuraScan
 
 ## 3.Setup Accura Scan licenses into your projects
 
-Accura Scan has two license require for use full functionality of this library. Generate your own Accura license from [here](https://sandbox.accurascan.com/) using your bundle id.
+Accura Scan has two license require for use full functionality of this library. To generate your Accura Scan license contact sales@accurascan.com .
 
 **key.license**
 
@@ -124,7 +124,7 @@ This license is use for get face match percentages between two face pictures.
 Create "assets" folder under app/src/main and Add license file in to assets folder.
 - key.license // for Accura Scan OCR
 - accuraface.license // for Accura Scan Face Match
-Generate your Accura Scan license from https://accurascan.com/developer/dashboard
+To generate your Accura Scan license contact sales@accurascan.com
 ```
 
 **For iOS**
