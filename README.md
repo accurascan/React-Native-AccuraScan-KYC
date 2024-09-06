@@ -162,19 +162,19 @@ isBankCardEnable: boolean,
 isMRZEnable: boolean
 }
 
-## Optional: Get Dynamic license configuration from SDK. It returns all active functionalities of your license.
+## Optional
 
 ### Setting up Dynamic License
 
 ```
   const getAccuraSetupDynamic = async () => {
-
+    //Refer the Demo App for example
     let config = {
-      licensePath: keyFilePath,  // for key.license file path
-      faceLicensePath: faceFilePath // for accuraface.license file path 
+      licensePath: keyFilePath,  // for key.license file path downloaded and stored in the local storage
+      faceLicensePath: faceFilePath // for accuraface.license file path downloaded and stored in the local storage
     };
 
-    //Method for get dynamic license info from native OS.
+    //Method to get details from dynamic license
     AccurascanKyc.getDynamicMetaData([config], (error, response) => {
       if (error != null) {
 
