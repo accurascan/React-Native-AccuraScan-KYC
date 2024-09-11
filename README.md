@@ -10,11 +10,11 @@ Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
 
-`yarn add 'accurascan_kyc'`
+`yarn add 'accurascan_kyc@1.3.1'`
 
 OR
 
-`npm i accurascan_kyc`
+`npm i accurascan_kyc@1.3.1`
 
 **Usage**
 
