@@ -90,12 +90,6 @@ export default function FirstScreen({ navigation }){
         setMaxGlarePercentage: 99,
         setBlurPercentage: 60,
         setCameraFacing: 0,
-
-        setIsDocEnable : true,
-        setDocUrl : "Your Api",
-        setProgressMessage: "API Loading...",
-        setHideProgressDialogue: false,
-        setApiTimer: 50,
       };
   
       var accuraConfigs = {
