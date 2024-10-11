@@ -174,6 +174,12 @@ isMRZEnable: boolean
       setMinGlarePercentage: 6,    // Set min percentage for glare
       setMaxGlarePercentage: 99,   // Set max percentage for glare
       setBlurPercentage: 60,       //0 for clean document and 100 for Blurry document
+
+      setIsDocEnable : true, //set false to disable Document Liveness
+      setDocUrl : "URL", //Add you Document Liveness URL
+      setProgressMessage: "API Loading...", //Add Loading Text
+      setHideProgressDialogue: false, //true to disable Progress Dialogue
+      setApiTimer: 50,  // Set the API calling timer
     };
 
     var accuraConfigs = {
