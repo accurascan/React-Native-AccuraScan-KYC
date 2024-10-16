@@ -10,11 +10,11 @@ Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
 
-`yarn add 'accurascan_kyc@1.3.1'`
+`yarn add https://git.accurascan.com/mahdi/react-nativei-nfc.git`
 
 OR
 
-`npm i accurascan_kyc@1.3.1`
+`npm i https://git.accurascan.com/mahdi/react-nativei-nfc.git`
 
 **Usage**
 
@@ -36,7 +36,6 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io/' }
-        maven { url 'https://developer.huawei.com/repo/' } // Add Huawei Maven
         maven {
             url 'https://jitpack.io'
             credentials { username 'jp_45kf9tvkijvd9c7cf34mehj1b6' }
@@ -104,6 +103,14 @@ take reference from [here](https://github.com/accurascan/React-Native-AccuraScan
 <string>App usage photos for get document picture.</string>
 <key>NSPhotoLibraryAddUsageDescription</key>
 <string>App usage photos for save document picture.</string>
+<key>NFCReaderUsageDescription</key>
+<string>App requires NFC access</string>
+<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+<array>
+    <string>A0000002471001</string>
+    <string>A0000002472001</string>
+    <string>00000000000000</string>
+</array>
 ```
 
 ## 3.Setup Accura Scan licenses into your projects
@@ -254,7 +261,6 @@ onPressMRZ = () => {
 ```
 
 **MRZType:** String
-
 value: other_mrz or passport_mrz or id_mrz or visa_card<br></br>
 
 **Success:** JSON Response {
@@ -268,7 +274,29 @@ back_img: URI?
 
 **Error:** String
 
-## 6.Method for scan OCR documents.
+## 6.Method to start Passport NFC.
+
+```
+// Add your Passport No. , Date of Birth(ddmmyy), Date of expiry(ddmmyy) in the below format and order(String).
+    let passArgs = [
+      PassportNo,
+      dobToPass,
+      doeToPass
+    ]; 
+
+    //Method for start OCR scaning from native OS.
+    AccurascanKyc.startNFC(passArgs, (error, response) => {
+      if (error != null) {
+        console.log('Failure!', error);
+
+      } else {
+       console.log("NFC_response: ", response)
+      }
+    })
+```
+
+
+## 7.Method for scan OCR documents.
 
 ```
 onPressOCR = () => {
@@ -293,7 +321,7 @@ onPressOCR = () => {
 **Success:** JSON Response
 **Error:** String
 
-## 7.Method for scan barcode.
+## 8.Method for scan barcode.
 
 ```
 onPressBarcode = () => {
@@ -311,7 +339,7 @@ onPressBarcode = () => {
 **Success:** JSON Response
 **Error:** String
 
-## 8.Method for scan bankcard.
+## 9.Method for scan bankcard.
 
 ```
 onPressBankcard = () => {
@@ -328,7 +356,7 @@ onPressBankcard = () => {
 **Success:** JSON Response
 **Error:** String
 
-## 8.Method for get face match percentages between two face.
+## 10.Method for get face match percentages between two face.
 
 ```
 onPressFaceMatch = () => {
@@ -377,7 +405,7 @@ score: Float
 
 **Error:** String
 
-## 9.Method for liveness check.
+## 11.Method for liveness check.
 
 ```
 onPressStartLiveness = () => {
