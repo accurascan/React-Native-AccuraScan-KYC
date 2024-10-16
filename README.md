@@ -95,6 +95,8 @@ take reference from [here](https://github.com/accurascan/React-Native-AccuraScan
 
 3.Run `pod install`
 
+Note: Add the NFC Entitlement in your target
+
 **Add this permissions into iOS Info.plist file.**
 
 ```
