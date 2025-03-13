@@ -24,6 +24,8 @@ export default function ResultScreen({ route }){
     };
 
     var lconfig = {
+      setEnableFaceMovement: true,
+      setEnableOralVerification: true,
       backGroundColor: '#FFC4C4C5',
       closeIconColor: '#FF000000',
       feedbackBackGroundColor: '#FFC4C4C5',

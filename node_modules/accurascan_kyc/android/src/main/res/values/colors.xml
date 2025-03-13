@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#AC0D18</color>
+
+    <color name="colorPrimary">#D32D39</color>
+    <color name="colorAccent">#D32D39</color>
+
+    <color name="red">#D32D39</color>
+    <color name="tab_color">#E7344A</color>
+    <color name="white">#80000000</color>
+    <color name="black">#000000</color>
+    // result_screen
+    <color name="darkGray">#2f323a</color>
+    <color name="lightGray">#64676c</color>
+    <color name="backGroundColor">#edeff5</color>
+    <color name="security_true">#a0d536</color>
+    <color name="security_false">#db4437</color>
+
+
+    // Accura liveness screen
+    <color name="livenessBackground">#FFC4C4C5</color>
+    <color name="livenessCloseIcon">#FF000000</color>
+    <color name="livenessfeedbackBg">#00000000</color>
+    <color name="livenessfeedbackText">#FF000000</color>
+
+    // Accura Fm auto capture camera
+    <color name="fm_camera_Background">#FFC4C4C5</color>
+    <color name="fm_camera_CloseIcon">#FF000000</color>
+    <color name="fm_camera_feedbackBg">#00000000</color>
+    <color name="fm_camera_feedbackText">#FF000000</color>
+</resources>

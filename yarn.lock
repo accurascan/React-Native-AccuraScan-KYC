@@ -1985,10 +1985,10 @@ accepts@^1.3.7, accepts@~1.3.5, accepts@~1.3.7:
     mime-types "~2.1.34"
     negotiator "0.6.3"
 
-accurascan_kyc@^1.1.7:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/accurascan_kyc/-/accurascan_kyc-1.2.3.tgz#be7778bf47385c71824caa805b475df9cdfd3880"
-  integrity sha512-qKkPx/9obUsRPqSk2TY/vh7t4yPPvTg3E/frt0+gMe5fiKYxeUi+gLA1/KC25TnQh3HILzWFJpVGHs/ypSDZTw==
+accurascan_kyc@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/accurascan_kyc/-/accurascan_kyc-1.3.5.tgz#f8b7334fb2ce871ee778bee469b5454f15f59e5b"
+  integrity sha512-qL+bXmyMUmX4AcNo9c+ITLlVcuaWOEQiSyo37uYRoiVqtLrBBeHfsk7i826odVrMtqn5jaoafYBNRV0S0R6Iwg==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"

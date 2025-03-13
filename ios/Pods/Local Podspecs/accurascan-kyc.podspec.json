@@ -1,0 +1,25 @@
+{
+  "name": "accurascan-kyc",
+  "version": "1.3.5",
+  "summary": "Accura Scan",
+  "homepage": "https://github.com/accurascan/React-Native-AccuraScan-KYC/blob/main/README.md",
+  "license": "MIT",
+  "authors": "Accura Scan <anas@accurascan.com> (https://github.com/accurascan/React-Native-AccuraScan-KYC)",
+  "platforms": {
+    "ios": "12.0"
+  },
+  "source": {
+    "git": "https://git.accurascan.com/mahdi/hybrid-react-kyc.git, :tag => "
+  },
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "resources": "ios/**/*.{png,jpeg,jpg,xib,xcassets,imageset,gif,mp3,storyboard}",
+  "dependencies": {
+    "React-Core": [
+
+    ],
+    "AccuraKYC": [
+      "4.2.0"
+    ]
+  },
+  "static_framework": true
+}

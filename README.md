@@ -10,11 +10,11 @@ Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
 
-`yarn add 'accurascan_kyc@1.3.4'`
+`yarn add 'accurascan_kyc@1.3.5'`
 
 OR
 
-`npm i accurascan_kyc@1.3.4`
+`npm i accurascan_kyc@1.3.5`
 
 **Usage**
 
@@ -386,6 +386,8 @@ onPressStartLiveness = () => {
  };
 
  var lconfig = {
+   setEnableFaceMovement: true,
+   setEnableOralVerification: true,
    backGroundColor: '#FFC4C4C5',
    closeIconColor: '#FF000000',
    feedbackBackGroundColor: '#FFC4C4C5',
