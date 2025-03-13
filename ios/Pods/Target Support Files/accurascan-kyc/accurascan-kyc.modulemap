@@ -1,6 +1,0 @@
-framework module accurascan_kyc {
-  umbrella header "accurascan-kyc-umbrella.h"
-
-  export *
-  module * { export * }
-}

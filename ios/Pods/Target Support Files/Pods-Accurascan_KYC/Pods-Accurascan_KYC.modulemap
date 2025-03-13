@@ -1,6 +1,0 @@
-framework module Pods_Accurascan_KYC {
-  umbrella header "Pods-Accurascan_KYC-umbrella.h"
-
-  export *
-  module * { export * }
-}

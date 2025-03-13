@@ -1,8 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-Accurascan_KYC/Pods-Accurascan_KYC-resources.sh
-${BUILT_PRODUCTS_DIR}/accurascan-kyc/accurascan_kyc.framework/MainStoryboard_iPhone.storyboardc
-${PODS_ROOT}/../../node_modules/accurascan_kyc/ios/resources/accuraScanLogo.png
-${PODS_ROOT}/../../node_modules/accurascan_kyc/ios/resources/back_icon.png
-${PODS_ROOT}/../../node_modules/accurascan_kyc/ios/resources/flip_camera_icon.png
-${PODS_ROOT}/../../node_modules/accurascan_kyc/ios/resources/flip_document_icon.png
-${PODS_ROOT}/../../node_modules/accurascan_kyc/ios/resources/icn_close.png
-${PODS_ROOT}/../../node_modules/accurascan_kyc/ios/resources/ic_logo.png
