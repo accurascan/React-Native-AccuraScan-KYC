@@ -59,10 +59,10 @@ export default function FirstScreen({ navigation }){
           //   ];
           // }
     
-          // res?.countries?.map(
-          //   (item) =>
-          //     (newContries = [...newContries, { label: item.name, value: a++ }])
-          // );
+          res?.countries?.map(
+            (item) =>
+              (newContries = [...newContries, { label: item.name, value: a++ }])
+          );
   
           var newBarcodeTypes = [];
           // res?.barcodes?.map(

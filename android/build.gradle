@@ -2,6 +2,7 @@
 
 buildscript {
     ext {
+        ext.kotlin_version = '1.7.20'
         buildToolsVersion = "33.0.0"
         minSdkVersion = 21
         compileSdkVersion = 33
@@ -15,14 +16,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.3.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("com.android.tools.build:gradle:7.4.2")
         classpath("com.facebook.react:react-native-gradle-plugin")
     }
 }
 allprojects {
     repositories {
         google()
-        jcenter()
+        // jcenter()
         maven { url 'https://jitpack.io/' }
         maven { url 'https://developer.huawei.com/repo/' } // Add Huawei Maven
         maven {

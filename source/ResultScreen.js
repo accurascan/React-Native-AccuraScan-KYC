@@ -23,8 +23,9 @@ export default function ResultScreen({ route }){
   const [fmScore, setfmScore] = React.useState(0.0);
   const [lvScore, setlvScore] = React.useState(0.0);
   const [secondImageURI, setsecondImageURI] = React.useState("");
+  const  [NFCresult, setNFCresult] = React.useState(null);
 
-  React.useEffect(()=>{
+  React.useEffect(()=>{11
     LogBox.ignoreAllLogs();
   },[])
   onPressStartLiveness = () => {
@@ -140,19 +141,40 @@ export default function ResultScreen({ route }){
     
     if (result.error) {
       console.error("NFC Error:", result.error);
-      // Handle the error (e.g., show an alert or update state)
+      setNFCresult(null);
     } else if (result.response) {
       console.log("NFC Response:", result.response);
-      // Handle the success response (e.g., update state or UI)
-      // For example, you can update the result state
-      // this.NFCresult = result.response;
+      setNFCresult(result.response);
     }
   };
 
-  // setPopupVisible = (visible) => {
-  //   console.log("setPopupVisible",visible)
-  //   isPopupVisible = visible;
-  // };
+  //nfc table ui
+  renderNFCDataTable = () => {
+    if (!NFCresult || Object.keys(NFCresult).length === 0) {
+      // this.saveLogToFile(`renderNFCDataTable UI NFCresult is empty`);
+      return <View />;
+    }
+  
+    const filteredData = Object.entries(NFCresult).filter(
+      ([key]) => key !== 'face_img'
+    );
+    // this.saveLogToFile(`renderNFCDataTable UI NFCresult`);
+    return (
+      <View style={styles.nfcContainer}>
+        <Text style={styles.nfcHeader}>NFC</Text>
+        {filteredData.map(([key, value], index) => (
+          <View key={index.toString()} style={styles.row}>
+            <Text style={styles.keyText}>{key}</Text>
+            <Text style={styles.valueText}>
+              {value !== null ? value.toString() : 'N/A'}
+            </Text>
+          </View>
+        ))}
+      </View>
+    );
+  };
+  
+  //
 
   getMRZLable = (key) => {
     var lableText = '';
@@ -268,6 +290,19 @@ export default function ResultScreen({ route }){
               flex: 1,
             }}
           >
+
+            <Text
+              style={{
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 15,
+                marginLeft: 5,
+                marginBottom: 30,
+              }}
+            >
+              Place the NFC page behind the back of the mobile where the NFC chip reader is usually located.
+            </Text>
+
           {/* Custom popup */}
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <CustomPopup
@@ -293,14 +328,26 @@ export default function ResultScreen({ route }){
                   style={styles.faceImageView}
                   source={{uri: result?.face}}
                 />
-                {secondImageURI !== '' ? (
+                  {/* nfc image */}
+
+                  {NFCresult && NFCresult.face_img ? (
+                    <Image
+                      style={[styles.faceImageView, { marginLeft: 50 }]}
+                      source={{ uri: NFCresult.face_img }}
+                    />
+                  ) : (
+                    <View />
+                  )}
+                      {/* nfc image */}
+
+                {/* {secondImageURI !== '' ? (
                   <Image
                     style={[styles.faceImageView, {marginLeft: 50}]}
                     source={{uri: secondImageURI}}
                   />
                 ) : (
                   <View />
-                )}
+                )} */}
               </View>
               <View
                 style={{
@@ -382,6 +429,10 @@ export default function ResultScreen({ route }){
           )}
 
             <View style={{ marginTop: -20 }}>
+              {/* nfc result display */}
+              {renderNFCDataTable()}
+              {/* nfc result display */}
+
               {sides.map((side, index) => {
                 return (
                   <View key={index.toString()}>
@@ -603,5 +654,40 @@ dataHeader: {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+  },
+
+  // nfc ui
+  nfcContainer: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 5,
+    marginBottom: 20,
+    padding: 10,
+    backgroundColor: '#fff',
+  },
+  nfcHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'red',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  keyText: {
+    flex: 1,
+    color: 'red',
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  valueText: {
+    flex: 1,
+    color: '#333',
+    textAlign: 'right',
   },
 });

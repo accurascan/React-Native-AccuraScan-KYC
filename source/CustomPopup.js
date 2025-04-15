@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, Button, Dimensions } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AccurascanKyc from 'accurascan_kyc';
+import {getResultJSON} from './utils/utility';
 
 const CustomPopup = ({ isVisible, onClose, PassportNo,DOB, DOE, onNFCResult}) => {
   const [dob, setDob] = useState(null);
@@ -13,14 +14,19 @@ const CustomPopup = ({ isVisible, onClose, PassportNo,DOB, DOE, onNFCResult}) =>
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
     const year = String(date.getFullYear()).slice(-2); 
-    return `${day}-${month}-${year}`;
+    return `${year}${month}${day}`;
   };
 
   const formatDateForFunction = (date) => {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = String(date.getFullYear()).slice(-2);
-    return `${day}${month}${year}`;
+    return `${year}${month}${day}`;
+  };
+
+  const formatDateForFunction1 = (dateStr) => {
+    const [day, month, year] = dateStr.split('-');
+    return `${year}${month}${day}`; // YYMMDD
   };
 
   const handleDobConfirm = (date) => {
@@ -37,8 +43,8 @@ const CustomPopup = ({ isVisible, onClose, PassportNo,DOB, DOE, onNFCResult}) =>
 
   const handleNFC = () => {
 
-    const dobToPass = dob ? formatDateForFunction(new Date(dob)) : DOB.replace(/-/g, '');
-    const doeToPass = doe ? formatDateForFunction(new Date(doe)) : DOE.replace(/-/g, '');
+    const dobToPass = dob ? formatDateForFunction(new Date(dob)) : formatDateForFunction1(DOB);
+    const doeToPass = doe ? formatDateForFunction(new Date(doe)) : formatDateForFunction1(DOE);
     console.log(`handleNFC dob:- ${dobToPass} doe:- ${doeToPass} passportNo:- ${PassportNo}`)
     let passArgs = [
       PassportNo,
@@ -55,7 +61,7 @@ const CustomPopup = ({ isVisible, onClose, PassportNo,DOB, DOE, onNFCResult}) =>
         // this.showAlert('Failure!', error);
         onNFCResult({ error });
       } else {
-        const res = this.getResultJSON(response);
+        const res = getResultJSON(response);
        console.log("NFC_response: ", res)
        onNFCResult({ response: res });
       }
@@ -68,13 +74,18 @@ const CustomPopup = ({ isVisible, onClose, PassportNo,DOB, DOE, onNFCResult}) =>
       <View style={styles.modalBackground}>
         <View style={styles.popupContainer}>
           <View style={styles.header}>
-            <Text style={styles.userId}>User Id: {PassportNo}</Text>
+            {/* <Text style={styles.userId}>User Id: {PassportNo}</Text> */}
             <TouchableOpacity onPress={onClose}>
               <Text style={styles.closeButton}>✕</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.content}>
+
+            <View style={styles.header}>
+                <Text style={styles.userId}>ID Number:</Text>
+                <Text style={styles.dateText}>{PassportNo}</Text>
+            </View>
 
             <View style={styles.header}>
               <Text style={styles.label}>Date of Birth:</Text>
@@ -134,7 +145,8 @@ const styles = StyleSheet.create({
   },
   userId: {
     fontSize: 16,
-    fontWeight: 'bold',
+    color: 'black',
+    // fontWeight: 'bold',
   },
   closeButton: {
     fontSize: 24,

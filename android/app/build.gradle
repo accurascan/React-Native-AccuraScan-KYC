@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: "org.jetbrains.kotlin.android"
 
 import com.android.build.OutputFile
 
@@ -91,7 +92,7 @@ def reactNativeArchitectures() {
 android {
     ndkVersion rootProject.ext.ndkVersion
 
-    compileSdkVersion 33
+    compileSdkVersion 34
     namespace "accurascan.hybrid.com"
     defaultConfig {
         applicationId "accurascan.hybrid.com"
