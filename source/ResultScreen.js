@@ -323,6 +323,7 @@ export default function ResultScreen({ route }){
                   justifyContent: 'center',
                   alignItems: 'center',
                   flexDirection: 'row',
+                  marginVertical: 10,
                 }}>
                 <Image
                   style={styles.faceImageView}
@@ -349,7 +350,7 @@ export default function ResultScreen({ route }){
                   <View />
                 )} */}
               </View>
-              <View
+       {/*         <View
                 style={{
                   width: '100%',
                   alignItems: 'center',
@@ -397,7 +398,7 @@ export default function ResultScreen({ route }){
                     </Text>
                   </View>
                 </TouchableOpacity>
-              </View>
+              </View>   
               <View
                 style={{
                   width: '100%',
@@ -422,7 +423,7 @@ export default function ResultScreen({ route }){
                   }}>
                   {parseInt(fmScore).toFixed(2) + '%'}
                 </Text>
-              </View>
+              </View> */}
             </View>
           ) : (
             <View />

@@ -197,13 +197,13 @@ export default function FirstScreen({ navigation }){
                       style={styles.FirstView}
                     />
                   </TouchableOpacity>
-                     <TouchableOpacity
+                     {/* <TouchableOpacity
                       onPress={() => navigation.navigate('Facematch Screen')}>
                       <Image
                         source={require('../assets/images/Facematch.jpg')}
                         style={styles.FirstView}
                       />
-                    </TouchableOpacity> 
+                    </TouchableOpacity>  */}
                 </View>
               </SafeAreaView>
             }
