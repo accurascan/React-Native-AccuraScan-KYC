@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import AccurascanKyc from 'accurascan_kyc';
+import AccurascanKyc from 'accurascan_kyc_nfc';
 import {getResultJSON} from './utils/utility';
 import {
     StyleSheet,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, Button, Dimensions } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import AccurascanKyc from 'accurascan_kyc';
+import AccurascanKyc from 'accurascan_kyc_nfc';
 import {getResultJSON} from './utils/utility';
 
 const CustomPopup = ({ isVisible, onClose, PassportNo,DOB, DOE, onNFCResult}) => {

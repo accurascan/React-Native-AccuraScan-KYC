@@ -9,7 +9,7 @@ import {
     Image,
     LogBox
   } from 'react-native';
-import AccurascanKyc from 'accurascan_kyc';
+import AccurascanKyc from 'accurascan_kyc_nfc';
 import {getResultJSON, showAlert} from './utils/utility';
 
 export default function ResultScreen({ route }){

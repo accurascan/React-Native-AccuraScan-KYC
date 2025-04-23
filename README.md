@@ -4,17 +4,17 @@ Accura Scan OCR is used for Optical character recognition.
 
 ## Note:-
 
-`yarn add https://git.accurascan.com/mahdi/react-nativei-nfc.git`
+`yarn add accurascan_kyc_nfc`
 
 OR
 
-`npm i https://git.accurascan.com/mahdi/react-nativei-nfc.git`
+`npm i accurascan_kyc_nfc`
 
 **Usage**
 
 Import npm library into file.
 
-`import AccurascanKyc from 'accurascan_kyc';`
+`import AccurascanKyc from 'accurascan_kyc_nfc';`
 
 ## 1.Setup Android
 
