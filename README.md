@@ -291,12 +291,12 @@ onPressOCR = () => {
 **Success:** JSON Response
 **Error:** String
 
-## 7.Method to start Passport NFC.
+## 7.Method to start Passport/ID Number NFC.
 
 ```
 // Add your Passport No. , Date of Birth(yymmdd), Date of expiry(yymmdd) in the below format and order(String).
     let passArgs = [
-      PassportNo,  // Passport Number (from OCR/MRZ response)
+      PassportNo/ID_Number,  // Passport/ID Number Number (from OCR/MRZ response)
       dobToPass,   // Date of Birth in yymmdd format (from OCR/MRZ response)
       doeToPass    // Date of Expiry in yymmdd format (from OCR/MRZ response)
     ]; 
