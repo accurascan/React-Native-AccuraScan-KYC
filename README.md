@@ -117,16 +117,12 @@ Accura Scan has two license require for use full functionality of this library. 
 
 This license is compulsory for this library to work. it will get all setup of accura SDK.
 
-**accuraface.license**
-
-This license is use for get face match percentages between two face pictures.
 
 **For Android**
 
 ```
 Create "assets" folder under app/src/main and Add license file in to assets folder.
 - key.license // for Accura Scan OCR
-- accuraface.license // for Accura Scan Face Match
 To generate your Accura Scan license contact sales@accurascan.com
 ```
 
@@ -270,29 +266,7 @@ back_img: URI?
 
 **Error:** String
 
-## 6.Method to start Passport NFC.
-
-```
-// Add your Passport No. , Date of Birth(yymmdd), Date of expiry(yymmdd) in the below format and order(String).
-    let passArgs = [
-      PassportNo,
-      dobToPass,
-      doeToPass
-    ]; 
-
-    //Method for start OCR scaning from native OS.
-    AccurascanKyc.startNFC(passArgs, (error, response) => {
-      if (error != null) {
-        console.log('Failure!', error);
-
-      } else {
-       console.log("NFC_response: ", response)
-      }
-    })
-```
-
-
-## 7.Method for scan OCR documents.
+## 6.Method for scan OCR documents.
 
 ```
 onPressOCR = () => {
@@ -317,6 +291,28 @@ onPressOCR = () => {
 **Success:** JSON Response
 **Error:** String
 
+## 7.Method to start Passport NFC.
+
+```
+// Add your Passport No. , Date of Birth(yymmdd), Date of expiry(yymmdd) in the below format and order(String).
+    let passArgs = [
+      PassportNo,  // Passport Number (from OCR/MRZ response)
+      dobToPass,   // Date of Birth in yymmdd format (from OCR/MRZ response)
+      doeToPass    // Date of Expiry in yymmdd format (from OCR/MRZ response)
+    ]; 
+
+    //Method for start OCR scaning from native OS.
+    AccurascanKyc.startNFC(passArgs, (error, response) => {
+      if (error != null) {
+       console.log('Failure!', error);
+      } else {
+       console.log("NFC_response: ", response)
+      }
+    })
+```
+
+**Success:** JSON Response
+**Error:** String
 
 License:
 MIT
