@@ -333,7 +333,7 @@ export default function ResultScreen({ route }){
 
                   {NFCresult && NFCresult.face_img ? (
                     <Image
-                      style={[styles.faceImageView, { marginLeft: 50 }]}
+                      style={[styles.faceImageView, { marginLeft: 30 }]}
                       source={{ uri: NFCresult.face_img }}
                     />
                   ) : (
@@ -341,16 +341,16 @@ export default function ResultScreen({ route }){
                   )}
                       {/* nfc image */}
 
-                {/* {secondImageURI !== '' ? (
+                {secondImageURI !== '' ? (
                   <Image
-                    style={[styles.faceImageView, {marginLeft: 50}]}
+                    style={[styles.faceImageView, {marginLeft: 30}]}
                     source={{uri: secondImageURI}}
                   />
                 ) : (
                   <View />
-                )} */}
+                )} 
               </View>
-       {/*         <View
+                <View
                 style={{
                   width: '100%',
                   alignItems: 'center',
@@ -423,7 +423,7 @@ export default function ResultScreen({ route }){
                   }}>
                   {parseInt(fmScore).toFixed(2) + '%'}
                 </Text>
-              </View> */}
+              </View> 
             </View>
           ) : (
             <View />

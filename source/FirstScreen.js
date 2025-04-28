@@ -39,25 +39,25 @@ export default function FirstScreen({ navigation }){
             newContries = [
               ...newContries,
               { label: 'Passport', value: 'passport_mrz' },
-              // { label: 'Mrz ID', value: 'id_mrz' },
-              // { label: 'Visa Card', value: 'visa_card' },
-              // { label: 'Other', value: 'other_mrz' },
+              { label: 'Mrz ID', value: 'id_mrz' },
+              { label: 'Visa Card', value: 'visa_card' },
+              { label: 'Other', value: 'other_mrz' },
             ];
           }
     
-          // if (res?.isBarcode) {
-          //   newContries = [
-          //     ...newContries,
-          //     { label: 'Barcode', value: 'Barcode' },
-          //   ];
-          // }
+          if (res?.isBarcode) {
+            newContries = [
+              ...newContries,
+              { label: 'Barcode', value: 'Barcode' },
+            ];
+          }
     
-          // if (res?.isBankCard) {
-          //   newContries = [
-          //     ...newContries,
-          //     { label: 'BankCard', value: 'BankCard' },
-          //   ];
-          // }
+          if (res?.isBankCard) {
+            newContries = [
+              ...newContries,
+              { label: 'BankCard', value: 'BankCard' },
+            ];
+          }
     
           res?.countries?.map(
             (item) =>
@@ -65,13 +65,13 @@ export default function FirstScreen({ navigation }){
           );
   
           var newBarcodeTypes = [];
-          // res?.barcodes?.map(
-          //   (item) =>
-          //     (newBarcodeTypes = [
-          //       ...newBarcodeTypes,
-          //       { label: item.name, value: item.type },
-          //     ])
-          // );
+          res?.barcodes?.map(
+            (item) =>
+              (newBarcodeTypes = [
+                ...newBarcodeTypes,
+                { label: item.name, value: item.type },
+              ])
+          );
             objSDKRes = res,
             ocrContries = newContries;
             barcodeTypes = newBarcodeTypes;
@@ -197,13 +197,14 @@ export default function FirstScreen({ navigation }){
                       style={styles.FirstView}
                     />
                   </TouchableOpacity>
-                     {/* <TouchableOpacity
-                      onPress={() => navigation.navigate('Facematch Screen')}>
-                      <Image
-                        source={require('../assets/images/Facematch.jpg')}
-                        style={styles.FirstView}
-                      />
-                    </TouchableOpacity>  */}
+                     
+                  <TouchableOpacity
+                  onPress={() => navigation.navigate('Facematch Screen')}>
+                  <Image
+                    source={require('../assets/images/Facematch.jpg')}
+                    style={styles.FirstView}
+                  />
+                </TouchableOpacity>  
                 </View>
               </SafeAreaView>
             }

@@ -2,6 +2,12 @@
 
 Accura Scan OCR is used for Optical character recognition.
 
+Accura Scan Face Match is used for Matching 2 Faces, Source face and Target face. It matches the User Image from a Selfie vs User Image in document.
+
+Accura Scan Authentication is used for your customer verification and authentication. Unlock the True Identity of Your Users with 3D Selfie Technology
+
+Below steps to setup Accura Scan's SDK to your project.
+
 ## Note:-
 
 `yarn add accurascan_kyc_nfc`
@@ -291,12 +297,12 @@ onPressOCR = () => {
 **Success:** JSON Response
 **Error:** String
 
-## 7.Method to start Passport/ID Number NFC.
+## 7.Method to start Passport NFC.
 
 ```
 // Add your Passport No. , Date of Birth(yymmdd), Date of expiry(yymmdd) in the below format and order(String).
     let passArgs = [
-      PassportNo/ID_Number,  // Passport/ID Number Number (from OCR/MRZ response)
+      PassportNo,  // Passport Number (from OCR/MRZ response)
       dobToPass,   // Date of Birth in yymmdd format (from OCR/MRZ response)
       doeToPass    // Date of Expiry in yymmdd format (from OCR/MRZ response)
     ]; 
@@ -312,6 +318,144 @@ onPressOCR = () => {
 ```
 
 **Success:** JSON Response
+**Error:** String
+
+## 8.Method for scan barcode.
+
+```
+onPressBarcode = () => {
+   let passArgs = [this.barcodeSelected];
+   AccurascanKyc.startBarcode(passArgs, (error, response) => {
+     if (error != null) {
+       console.log(error);
+     } else {
+       console.log('Success!', response);
+     }
+   });
+};
+```
+
+**Success:** JSON Response
+**Error:** String
+
+## 9.Method for scan bankcard.
+
+```
+onPressBankcard = () => {
+ AccurascanKyc.startBankCard((error, response) => {
+   if (error != null) {
+     console.log(error);
+   } else {
+      console.log('Success!', response);
+   }
+ });
+};
+```
+
+**Success:** JSON Response
+**Error:** String
+
+## 10.Method for get face match percentages between two face.
+
+```
+onPressFaceMatch = () => {
+ var accuraConfs = {
+   face_uri: this.facematchURI,
+ };
+ var fconfig = {
+   backGroundColor: '#FFC4C4C5',
+   closeIconColor: '#FF000000',
+   feedbackBackGroundColor: '#FFC4C4C5',
+   feedbackTextColor: '#FF000000',
+   setFeedbackTextSize: 18,
+   setFeedBackframeMessage: 'Frame Your Face',
+   setFeedBackAwayMessage: 'Move Phone Away',
+   setFeedBackOpenEyesMessage: 'Keep Your Eyes Open',
+   setFeedBackCloserMessage: 'Move Phone Closer',
+   setFeedBackCenterMessage: 'Move Phone Center',
+   setFeedbackMultipleFaceMessage: 'Multiple Face Detected',
+   setFeedBackFaceSteadymessage: 'Keep Your Head Straight',
+   setFeedBackLowLightMessage: 'Low light detected',
+   setFeedBackBlurFaceMessage: 'Blur Detected Over Face',
+   setFeedBackGlareFaceMessage: 'Glare Detected',
+   setBlurPercentage: 80,
+   setGlarePercentage_0: -1,
+   setGlarePercentage_1: -1,
+   feedbackDialogMessage: 'Loading...',
+   feedBackProcessingMessage: 'Processing...',
+   isShowLogo: 1,
+ };
+ let passArgs = [accuraConfs, fconfig];
+
+ AccurascanKyc.startFaceMatch(passArgs, (error, response) => {
+   if (error != null) {
+     console.log(error);
+   } else {
+     console.log('Success!', response);
+   }
+ });
+};
+```
+
+**Success:** JSON Response {
+detect: URI?
+score: Float
+}
+
+**Error:** String
+
+## 11.Method for liveness check.
+
+```
+onPressStartLiveness = () => {
+ var accuraConfs = {
+   face_uri: this.facematchURI,
+ };
+
+ var lconfig = {
+   backGroundColor: '#FFC4C4C5',
+   closeIconColor: '#FF000000',
+   feedbackBackGroundColor: '#FFC4C4C5',
+   feedbackTextColor: '#FF000000',
+   setFeedbackTextSize: 18,
+   setFeedBackframeMessage: 'Frame Your Face',
+   setFeedBackAwayMessage: 'Move Phone Away',
+   setFeedBackOpenEyesMessage: 'Keep Your Eyes Open',
+   setFeedBackCloserMessage: 'Move Phone Closer',
+   setFeedBackCenterMessage: 'Move Phone Center',
+   setFeedbackMultipleFaceMessage: 'Multiple Face Detected',
+   setFeedBackFaceSteadymessage: 'Keep Your Head Straight',
+   setFeedBackBlurFaceMessage: 'Blur Detected Over Face',
+   setFeedBackGlareFaceMessage: 'Glare Detected',
+   setBlurPercentage: 80,
+   setGlarePercentage_0: -1,
+   setGlarePercentage_1: -1,
+   setLivenessURL: 'Your URL',
+   setFeedBackLowLightMessage: 'Low light detected',
+   feedbackLowLightTolerence: 39,
+   feedbackDialogMessage: 'Loading...',
+   feedBackProcessingMessage: 'Processing...',
+   isShowLogo: 1,
+ };
+
+ let passArgs = [accuraConfs, lconfig];
+
+ AccurascanKyc.startLiveness(passArgs, (error, response) => {
+   if (error != null) {
+     console.log(error);
+   } else {
+     console.log('Success!', response);
+   }
+ });
+};
+```
+
+**Success:** JSON Response {
+detect: URI?,
+Face_score: Float,
+score: Float,
+}
+
 **Error:** String
 
 License:
