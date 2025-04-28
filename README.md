@@ -123,12 +123,16 @@ Accura Scan has two license require for use full functionality of this library. 
 
 This license is compulsory for this library to work. it will get all setup of accura SDK.
 
+**accuraface.license**
+
+This license is use for get face match percentages between two face pictures.
 
 **For Android**
 
 ```
 Create "assets" folder under app/src/main and Add license file in to assets folder.
 - key.license // for Accura Scan OCR
+- accuraface.license // for Accura Scan Face Match
 To generate your Accura Scan license contact sales@accurascan.com
 ```
 
