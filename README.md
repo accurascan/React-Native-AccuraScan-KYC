@@ -10,11 +10,11 @@ Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
 
-`yarn add accurascan_kyc_nfc`
+`yarn add accurascan_kyc_nfc@1.0.0`
 
 OR
 
-`npm i accurascan_kyc_nfc`
+`npm install accurascan_kyc_nfc@1.0.0`
 
 **Usage**
 
