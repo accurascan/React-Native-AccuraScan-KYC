@@ -304,9 +304,9 @@ onPressOCR = () => {
 ## 7.Method to start Passport NFC.
 
 ```
-// Add your Passport No. , Date of Birth(yymmdd), Date of expiry(yymmdd) in the below format and order(String).
+// Add your Passport No./ID Number , Date of Birth(yymmdd), Date of expiry(yymmdd) in the below format and order(String).
     let passArgs = [
-      PassportNo,  // Passport Number (from OCR/MRZ response)
+      PassportNo/ID Number,  // Passport Number/ID Number (from OCR/MRZ response)
       dobToPass,   // Date of Birth in yymmdd format (from OCR/MRZ response)
       doeToPass    // Date of Expiry in yymmdd format (from OCR/MRZ response)
     ]; 
