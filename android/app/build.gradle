@@ -8,6 +8,7 @@ import com.android.build.OutputFile
  * By default you don't need to apply any configuration, just uncomment the lines you need.
  */
 react {
+    autolinkLibrariesWithApp()
     /* Folders */
     //   The root of your project, i.e. where "package.json" lives. Default is '..'
     // root = file("../")
@@ -91,14 +92,19 @@ def reactNativeArchitectures() {
 android {
     ndkVersion rootProject.ext.ndkVersion
 
-    compileSdkVersion 33
+    compileSdkVersion 34
     namespace "accurascan.hybrid.com"
     defaultConfig {
         applicationId "accurascan.hybrid.com"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
+        ndk {
+         abiFilters 'armeabi-v7a', 'arm64-v8a'
+         //, 'x86', 'x86_64'
+           // abiFilters  'x86', 'x86_64'
+        }
     }
     packagingOptions {
         pickFirst 'lib/arm64-v8a/libcrypto.so'
@@ -128,6 +134,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+         release {
+            storeFile file('your_key_name.keystore')
+            storePassword 'qwerty'
+            keyAlias 'your_key_alias'
+            keyPassword 'qwerty'
+        }
     }
     buildTypes {
         debug {
@@ -137,8 +149,8 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // minifyEnabled enableProguardInReleaseBuilds
+            // proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 
@@ -178,4 +190,4 @@ dependencies {
     }
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+// apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

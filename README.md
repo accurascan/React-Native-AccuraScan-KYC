@@ -10,11 +10,11 @@ Below steps to setup Accura Scan's SDK to your project.
 
 ## Note:-
 
-`yarn add 'accurascan_kyc@1.3.4'`
+`yarn add 'accurascan_kyc@1.4.3'`
 
 OR
 
-`npm i accurascan_kyc@1.3.4`
+`npm i accurascan_kyc@1.4.3`
 
 **Usage**
 
@@ -34,7 +34,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         maven { url 'https://jitpack.io/' }
         maven { url 'https://developer.huawei.com/repo/' } // Add Huawei Maven
         maven {

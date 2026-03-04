@@ -14,6 +14,11 @@
 #ifndef __cplusplus
 #error This file must be compiled as Obj-C++. If you are importing it, you must change your file extension to .mm.
 #endif
+
+// Avoid multiple includes of FBReactNativeSpec symbols
+#ifndef FBReactNativeSpec_H
+#define FBReactNativeSpec_H
+
 #import <Foundation/Foundation.h>
 #import <RCTRequired/RCTRequired.h>
 #import <RCTTypeSafety/RCTConvertHelpers.h>
@@ -37,17 +42,25 @@
                           onSuccess:(RCTResponseSenderBlock)onSuccess;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAccessibilityInfo'
-     */
-    class JSI_EXPORT NativeAccessibilityInfoSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAccessibilityInfoSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeAccessibilityInfoSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAccessibilityInfo'
+   */
+  class JSI_EXPORT NativeAccessibilityInfoSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAccessibilityInfoSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeAccessibilityManager {
     struct SpecSetAccessibilityContentSizeMultipliersJSMultipliers {
@@ -112,17 +125,25 @@ namespace JS {
                                     options:(JS::NativeAccessibilityManager::SpecAnnounceForAccessibilityWithOptionsOptions &)options;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAccessibilityManager'
-     */
-    class JSI_EXPORT NativeAccessibilityManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAccessibilityManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeAccessibilityManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAccessibilityManager'
+   */
+  class JSI_EXPORT NativeAccessibilityManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAccessibilityManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeActionSheetManager {
     struct SpecShowActionSheetWithOptionsOptions {
@@ -179,23 +200,31 @@ namespace JS {
 - (void)dismissActionSheet;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeActionSheetManager'
-     */
-    class JSI_EXPORT NativeActionSheetManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeActionSheetManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeActionSheetManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeActionSheetManager'
+   */
+  class JSI_EXPORT NativeActionSheetManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeActionSheetManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeAlertManager {
     struct Args {
       NSString *title() const;
       NSString *message() const;
-      std::optional<facebook::react::LazyVector<id<NSObject> >> buttons() const;
+      std::optional<facebook::react::LazyVector<id<NSObject>>> buttons() const;
       NSString *type() const;
       NSString *defaultValue() const;
       NSString *cancelButtonKey() const;
@@ -220,17 +249,25 @@ namespace JS {
              callback:(RCTResponseSenderBlock)callback;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAlertManager'
-     */
-    class JSI_EXPORT NativeAlertManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAlertManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeAlertManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAlertManager'
+   */
+  class JSI_EXPORT NativeAlertManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAlertManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeAnimatedModule {
     struct EventMapping {
@@ -291,17 +328,25 @@ saveValueCallback:(RCTResponseSenderBlock)saveValueCallback;
 - (void)queueAndExecuteBatchedOperations:(NSArray *)operationsAndArgs;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAnimatedModule'
-     */
-    class JSI_EXPORT NativeAnimatedModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAnimatedModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeAnimatedModuleSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAnimatedModule'
+   */
+  class JSI_EXPORT NativeAnimatedModuleSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAnimatedModuleSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeAnimatedTurboModule {
     struct EventMapping {
@@ -362,35 +407,25 @@ saveValueCallback:(RCTResponseSenderBlock)saveValueCallback;
 - (void)queueAndExecuteBatchedOperations:(NSArray *)operationsAndArgs;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAnimatedTurboModule'
-     */
-    class JSI_EXPORT NativeAnimatedTurboModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAnimatedTurboModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
 
-@protocol NativeAnimationsDebugModuleSpec <RCTBridgeModule, RCTTurboModule>
+@interface NativeAnimatedTurboModuleSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
 
-- (void)startRecordingFps;
-- (void)stopRecordingFps:(double)animationStopTimeMs;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAnimationsDebugModule'
-     */
-    class JSI_EXPORT NativeAnimationsDebugModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAnimationsDebugModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAnimatedTurboModule'
+   */
+  class JSI_EXPORT NativeAnimatedTurboModuleSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAnimatedTurboModuleSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeAppState {
     struct Constants {
@@ -428,36 +463,53 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeAppState::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAppState'
-     */
-    class JSI_EXPORT NativeAppStateSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAppStateSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeAppStateSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAppState'
+   */
+  class JSI_EXPORT NativeAppStateSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAppStateSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeAppearanceSpec <RCTBridgeModule, RCTTurboModule>
 
 - (NSString * _Nullable)getColorScheme;
+- (void)setColorScheme:(NSString *)colorScheme;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeAppearance'
-     */
-    class JSI_EXPORT NativeAppearanceSpecJSI : public ObjCTurboModule {
-    public:
-      NativeAppearanceSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeAppearanceSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeAppearance'
+   */
+  class JSI_EXPORT NativeAppearanceSpecJSI : public ObjCTurboModule {
+  public:
+    NativeAppearanceSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeBlobModule {
     struct Constants {
@@ -500,37 +552,52 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeBlobModule::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeBlobModule'
-     */
-    class JSI_EXPORT NativeBlobModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeBlobModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeBlobModuleSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeBlobModule'
+   */
+  class JSI_EXPORT NativeBlobModuleSpecJSI : public ObjCTurboModule {
+  public:
+    NativeBlobModuleSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeBugReportingSpec <RCTBridgeModule, RCTTurboModule>
 
 - (void)startReportAProblemFlow;
 - (void)setExtraData:(NSDictionary *)extraData
           extraFiles:(NSDictionary *)extraFiles;
-- (void)setCategoryID:(NSString *)categoryID;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeBugReporting'
-     */
-    class JSI_EXPORT NativeBugReportingSpecJSI : public ObjCTurboModule {
-    public:
-      NativeBugReportingSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeBugReportingSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeBugReporting'
+   */
+  class JSI_EXPORT NativeBugReportingSpecJSI : public ObjCTurboModule {
+  public:
+    NativeBugReportingSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeClipboardSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -539,17 +606,25 @@ namespace facebook {
 - (void)setString:(NSString *)content;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeClipboard'
-     */
-    class JSI_EXPORT NativeClipboardSpecJSI : public ObjCTurboModule {
-    public:
-      NativeClipboardSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeClipboardSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeClipboard'
+   */
+  class JSI_EXPORT NativeClipboardSpecJSI : public ObjCTurboModule {
+  public:
+    NativeClipboardSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeDevLoadingViewSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -559,17 +634,25 @@ withBackgroundColor:(NSNumber *)withBackgroundColor;
 - (void)hide;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeDevLoadingView'
-     */
-    class JSI_EXPORT NativeDevLoadingViewSpecJSI : public ObjCTurboModule {
-    public:
-      NativeDevLoadingViewSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeDevLoadingViewSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeDevLoadingView'
+   */
+  class JSI_EXPORT NativeDevLoadingViewSpecJSI : public ObjCTurboModule {
+  public:
+    NativeDevLoadingViewSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeDevMenuSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -580,17 +663,25 @@ namespace facebook {
 - (void)setHotLoadingEnabled:(BOOL)enabled;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeDevMenu'
-     */
-    class JSI_EXPORT NativeDevMenuSpecJSI : public ObjCTurboModule {
-    public:
-      NativeDevMenuSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeDevMenuSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeDevMenu'
+   */
+  class JSI_EXPORT NativeDevMenuSpecJSI : public ObjCTurboModule {
+  public:
+    NativeDevMenuSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeDevSettingsSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -602,58 +693,84 @@ namespace facebook {
 - (void)setProfilingEnabled:(BOOL)isProfilingEnabled;
 - (void)toggleElementInspector;
 - (void)addMenuItem:(NSString *)title;
+- (void)openDebugger;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
 - (void)setIsShakeToShowDevMenuEnabled:(BOOL)enabled;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeDevSettings'
-     */
-    class JSI_EXPORT NativeDevSettingsSpecJSI : public ObjCTurboModule {
-    public:
-      NativeDevSettingsSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
 
-@protocol NativeDevSplitBundleLoaderSpec <RCTBridgeModule, RCTTurboModule>
+@interface NativeDevSettingsSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
 
-- (void)loadBundle:(NSString *)bundlePath
-           resolve:(RCTPromiseResolveBlock)resolve
-            reject:(RCTPromiseRejectBlock)reject;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeDevSplitBundleLoader'
-     */
-    class JSI_EXPORT NativeDevSplitBundleLoaderSpecJSI : public ObjCTurboModule {
-    public:
-      NativeDevSplitBundleLoaderSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeDevSettings'
+   */
+  class JSI_EXPORT NativeDevSettingsSpecJSI : public ObjCTurboModule {
+  public:
+    NativeDevSettingsSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
+
+@protocol NativeDevToolsSettingsManagerSpec <RCTBridgeModule, RCTTurboModule>
+
+- (void)setConsolePatchSettings:(NSString *)newConsolePatchSettings;
+- (NSString * _Nullable)getConsolePatchSettings;
+- (void)setProfilingSettings:(NSString *)newProfilingSettings;
+- (NSString * _Nullable)getProfilingSettings;
+
+@end
+
+@interface NativeDevToolsSettingsManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeDevToolsSettingsManager'
+   */
+  class JSI_EXPORT NativeDevToolsSettingsManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeDevToolsSettingsManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeDeviceEventManagerSpec <RCTBridgeModule, RCTTurboModule>
 
 - (void)invokeDefaultBackPressHandler;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeDeviceEventManager'
-     */
-    class JSI_EXPORT NativeDeviceEventManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeDeviceEventManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeDeviceEventManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeDeviceEventManager'
+   */
+  class JSI_EXPORT NativeDeviceEventManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeDeviceEventManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeDeviceInfo {
     struct DisplayMetrics {
@@ -779,17 +896,25 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeDeviceInfo::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeDeviceInfo'
-     */
-    class JSI_EXPORT NativeDeviceInfoSpecJSI : public ObjCTurboModule {
-    public:
-      NativeDeviceInfoSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeDeviceInfoSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeDeviceInfo'
+   */
+  class JSI_EXPORT NativeDeviceInfoSpecJSI : public ObjCTurboModule {
+  public:
+    NativeDeviceInfoSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeExceptionsManager {
     struct StackFrame {
@@ -846,17 +971,25 @@ namespace JS {
 - (void)dismissRedbox;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeExceptionsManager'
-     */
-    class JSI_EXPORT NativeExceptionsManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeExceptionsManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeExceptionsManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeExceptionsManager'
+   */
+  class JSI_EXPORT NativeExceptionsManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeExceptionsManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeFileReaderModuleSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -869,22 +1002,29 @@ namespace facebook {
             reject:(RCTPromiseRejectBlock)reject;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeFileReaderModule'
-     */
-    class JSI_EXPORT NativeFileReaderModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeFileReaderModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeFileReaderModuleSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeFileReaderModule'
+   */
+  class JSI_EXPORT NativeFileReaderModuleSpecJSI : public ObjCTurboModule {
+  public:
+    NativeFileReaderModuleSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeFrameRateLogger {
     struct SpecSetGlobalOptionsOptions {
       std::optional<bool> debug() const;
-      std::optional<bool> reportStackTraces() const;
 
       SpecSetGlobalOptionsOptions(NSDictionary *const v) : _v(v) {}
     private:
@@ -904,17 +1044,25 @@ namespace JS {
 - (void)endScroll;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeFrameRateLogger'
-     */
-    class JSI_EXPORT NativeFrameRateLoggerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeFrameRateLoggerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeFrameRateLoggerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeFrameRateLogger'
+   */
+  class JSI_EXPORT NativeFrameRateLoggerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeFrameRateLoggerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeHeadlessJsTaskSupportSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -924,26 +1072,34 @@ namespace facebook {
                  reject:(RCTPromiseRejectBlock)reject;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeHeadlessJsTaskSupport'
-     */
-    class JSI_EXPORT NativeHeadlessJsTaskSupportSpecJSI : public ObjCTurboModule {
-    public:
-      NativeHeadlessJsTaskSupportSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeHeadlessJsTaskSupportSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeHeadlessJsTaskSupport'
+   */
+  class JSI_EXPORT NativeHeadlessJsTaskSupportSpecJSI : public ObjCTurboModule {
+  public:
+    NativeHeadlessJsTaskSupportSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeI18nManager {
     struct Constants {
 
       struct Builder {
         struct Input {
-          RCTRequired<bool> isRTL;
           RCTRequired<bool> doLeftAndRightSwapInRTL;
-          RCTRequired<NSString *> localeIdentifier;
+          RCTRequired<bool> isRTL;
+          NSString *localeIdentifier;
         };
 
         /** Initialize with a set of values */
@@ -973,17 +1129,25 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeI18nManager::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeI18nManager'
-     */
-    class JSI_EXPORT NativeI18nManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeI18nManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeI18nManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeI18nManager'
+   */
+  class JSI_EXPORT NativeI18nManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeI18nManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeImageEditor {
     struct OptionsOffset {
@@ -1059,17 +1223,25 @@ namespace JS {
     errorCallback:(RCTResponseSenderBlock)errorCallback;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeImageEditor'
-     */
-    class JSI_EXPORT NativeImageEditorSpecJSI : public ObjCTurboModule {
-    public:
-      NativeImageEditorSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeImageEditorSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeImageEditor'
+   */
+  class JSI_EXPORT NativeImageEditorSpecJSI : public ObjCTurboModule {
+  public:
+    NativeImageEditorSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeImageLoaderIOSSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1093,17 +1265,25 @@ namespace facebook {
             reject:(RCTPromiseRejectBlock)reject;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeImageLoaderIOS'
-     */
-    class JSI_EXPORT NativeImageLoaderIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativeImageLoaderIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeImageLoaderIOSSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeImageLoaderIOS'
+   */
+  class JSI_EXPORT NativeImageLoaderIOSSpecJSI : public ObjCTurboModule {
+  public:
+    NativeImageLoaderIOSSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeImageStoreIOSSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1118,17 +1298,25 @@ namespace facebook {
              errorCallback:(RCTResponseSenderBlock)errorCallback;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeImageStoreIOS'
-     */
-    class JSI_EXPORT NativeImageStoreIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativeImageStoreIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeImageStoreIOSSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeImageStoreIOS'
+   */
+  class JSI_EXPORT NativeImageStoreIOSSpecJSI : public ObjCTurboModule {
+  public:
+    NativeImageStoreIOSSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeJSCHeapCaptureSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1136,17 +1324,25 @@ namespace facebook {
                   error:(NSString * _Nullable)error;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeJSCHeapCapture'
-     */
-    class JSI_EXPORT NativeJSCHeapCaptureSpecJSI : public ObjCTurboModule {
-    public:
-      NativeJSCHeapCaptureSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeJSCHeapCaptureSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeJSCHeapCapture'
+   */
+  class JSI_EXPORT NativeJSCHeapCaptureSpecJSI : public ObjCTurboModule {
+  public:
+    NativeJSCHeapCaptureSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeJSCSamplingProfilerSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1155,17 +1351,25 @@ namespace facebook {
                     error:(NSString * _Nullable)error;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeJSCSamplingProfiler'
-     */
-    class JSI_EXPORT NativeJSCSamplingProfilerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeJSCSamplingProfilerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeJSCSamplingProfilerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeJSCSamplingProfiler'
+   */
+  class JSI_EXPORT NativeJSCSamplingProfilerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeJSCSamplingProfilerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeKeyboardObserverSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1173,17 +1377,25 @@ namespace facebook {
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeKeyboardObserver'
-     */
-    class JSI_EXPORT NativeKeyboardObserverSpecJSI : public ObjCTurboModule {
-    public:
-      NativeKeyboardObserverSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeKeyboardObserverSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeKeyboardObserver'
+   */
+  class JSI_EXPORT NativeKeyboardObserverSpecJSI : public ObjCTurboModule {
+  public:
+    NativeKeyboardObserverSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeLinkingManagerSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1201,17 +1413,25 @@ namespace facebook {
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeLinkingManager'
-     */
-    class JSI_EXPORT NativeLinkingManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeLinkingManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeLinkingManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeLinkingManager'
+   */
+  class JSI_EXPORT NativeLinkingManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeLinkingManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeLogBoxSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1219,17 +1439,25 @@ namespace facebook {
 - (void)hide;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeLogBox'
-     */
-    class JSI_EXPORT NativeLogBoxSpecJSI : public ObjCTurboModule {
-    public:
-      NativeLogBoxSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeLogBoxSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeLogBox'
+   */
+  class JSI_EXPORT NativeLogBoxSpecJSI : public ObjCTurboModule {
+  public:
+    NativeLogBoxSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeModalManagerSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1237,24 +1465,32 @@ namespace facebook {
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeModalManager'
-     */
-    class JSI_EXPORT NativeModalManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeModalManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeModalManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeModalManager'
+   */
+  class JSI_EXPORT NativeModalManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeModalManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeNetworkingIOS {
     struct SpecSendRequestQuery {
       NSString *method() const;
       NSString *url() const;
-      id<NSObject>  data() const;
-      id<NSObject>  headers() const;
+      id<NSObject> data() const;
+      id<NSObject> headers() const;
       NSString *responseType() const;
       bool incrementalUpdates() const;
       double timeout() const;
@@ -1280,17 +1516,25 @@ namespace JS {
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeNetworkingIOS'
-     */
-    class JSI_EXPORT NativeNetworkingIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativeNetworkingIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeNetworkingIOSSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeNetworkingIOS'
+   */
+  class JSI_EXPORT NativeNetworkingIOSSpecJSI : public ObjCTurboModule {
+  public:
+    NativeNetworkingIOSSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativePlatformConstantsIOS {
     struct ConstantsReactNativeVersion {
@@ -1300,7 +1544,7 @@ namespace JS {
           RCTRequired<double> major;
           RCTRequired<double> minor;
           RCTRequired<double> patch;
-          RCTRequired<std::optional<double>> prerelease;
+          RCTRequired<NSString *> prerelease;
         };
 
         /** Initialize with a set of values */
@@ -1328,11 +1572,13 @@ namespace JS {
       struct Builder {
         struct Input {
           RCTRequired<bool> isTesting;
+          std::optional<bool> isDisableAnimations;
           RCTRequired<JS::NativePlatformConstantsIOS::ConstantsReactNativeVersion::Builder> reactNativeVersion;
           RCTRequired<bool> forceTouchAvailable;
           RCTRequired<NSString *> osVersion;
           RCTRequired<NSString *> systemName;
           RCTRequired<NSString *> interfaceIdiom;
+          std::optional<bool> isMacCatalyst;
         };
 
         /** Initialize with a set of values */
@@ -1359,17 +1605,25 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativePlatformConstantsIOS::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativePlatformConstantsIOS'
-     */
-    class JSI_EXPORT NativePlatformConstantsIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativePlatformConstantsIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativePlatformConstantsIOSSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativePlatformConstantsIOS'
+   */
+  class JSI_EXPORT NativePlatformConstantsIOSSpecJSI : public ObjCTurboModule {
+  public:
+    NativePlatformConstantsIOSSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativePushNotificationManagerIOS {
     struct SpecRequestPermissionsPermission {
@@ -1391,12 +1645,11 @@ namespace JS {
   namespace NativePushNotificationManagerIOS {
     struct Notification {
       NSString *alertTitle() const;
-      std::optional<double> fireDate() const;
       NSString *alertBody() const;
-      NSString *alertAction() const;
       id<NSObject> _Nullable userInfo() const;
       NSString *category() const;
-      NSString *repeatInterval() const;
+      std::optional<double> fireDate() const;
+      std::optional<double> fireIntervalSeconds() const;
       std::optional<double> applicationIconBadgeNumber() const;
       std::optional<bool> isSilent() const;
       NSString *soundName() const;
@@ -1437,17 +1690,25 @@ namespace JS {
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativePushNotificationManagerIOS'
-     */
-    class JSI_EXPORT NativePushNotificationManagerIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativePushNotificationManagerIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativePushNotificationManagerIOSSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativePushNotificationManagerIOS'
+   */
+  class JSI_EXPORT NativePushNotificationManagerIOSSpecJSI : public ObjCTurboModule {
+  public:
+    NativePushNotificationManagerIOSSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeRedBoxSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1456,17 +1717,25 @@ namespace facebook {
 - (void)dismiss;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeRedBox'
-     */
-    class JSI_EXPORT NativeRedBoxSpecJSI : public ObjCTurboModule {
-    public:
-      NativeRedBoxSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeRedBoxSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeRedBox'
+   */
+  class JSI_EXPORT NativeRedBoxSpecJSI : public ObjCTurboModule {
+  public:
+    NativeRedBoxSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeSegmentFetcherSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1478,24 +1747,32 @@ namespace facebook {
           callback:(RCTResponseSenderBlock)callback;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeSegmentFetcher'
-     */
-    class JSI_EXPORT NativeSegmentFetcherSpecJSI : public ObjCTurboModule {
-    public:
-      NativeSegmentFetcherSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeSegmentFetcherSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeSegmentFetcher'
+   */
+  class JSI_EXPORT NativeSegmentFetcherSpecJSI : public ObjCTurboModule {
+  public:
+    NativeSegmentFetcherSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeSettingsManager {
     struct Constants {
 
       struct Builder {
         struct Input {
-          RCTRequired<id<NSObject> > settings;
+          RCTRequired<id<NSObject>> settings;
         };
 
         /** Initialize with a set of values */
@@ -1524,17 +1801,25 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeSettingsManager::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeSettingsManager'
-     */
-    class JSI_EXPORT NativeSettingsManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeSettingsManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeSettingsManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeSettingsManager'
+   */
+  class JSI_EXPORT NativeSettingsManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeSettingsManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeShareModule {
     struct SpecShareContent {
@@ -1559,34 +1844,50 @@ namespace JS {
        reject:(RCTPromiseRejectBlock)reject;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeShareModule'
-     */
-    class JSI_EXPORT NativeShareModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeShareModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeShareModuleSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeShareModule'
+   */
+  class JSI_EXPORT NativeShareModuleSpecJSI : public ObjCTurboModule {
+  public:
+    NativeShareModuleSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeSoundManagerSpec <RCTBridgeModule, RCTTurboModule>
 
 - (void)playTouchSound;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeSoundManager'
-     */
-    class JSI_EXPORT NativeSoundManagerSpecJSI : public ObjCTurboModule {
-    public:
-      NativeSoundManagerSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeSoundManagerSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeSoundManager'
+   */
+  class JSI_EXPORT NativeSoundManagerSpecJSI : public ObjCTurboModule {
+  public:
+    NativeSoundManagerSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeSourceCode {
     struct Constants {
@@ -1620,17 +1921,25 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeSourceCode::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeSourceCode'
-     */
-    class JSI_EXPORT NativeSourceCodeSpecJSI : public ObjCTurboModule {
-    public:
-      NativeSourceCodeSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeSourceCodeSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeSourceCode'
+   */
+  class JSI_EXPORT NativeSourceCodeSpecJSI : public ObjCTurboModule {
+  public:
+    NativeSourceCodeSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeStatusBarManagerIOS {
     struct Constants {
@@ -1673,17 +1982,25 @@ namespace JS {
 - (facebook::react::ModuleConstants<JS::NativeStatusBarManagerIOS::Constants::Builder>)getConstants;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeStatusBarManagerIOS'
-     */
-    class JSI_EXPORT NativeStatusBarManagerIOSSpecJSI : public ObjCTurboModule {
-    public:
-      NativeStatusBarManagerIOSSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeStatusBarManagerIOSSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeStatusBarManagerIOS'
+   */
+  class JSI_EXPORT NativeStatusBarManagerIOSSpecJSI : public ObjCTurboModule {
+  public:
+    NativeStatusBarManagerIOSSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeTimingSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1695,17 +2012,25 @@ namespace facebook {
 - (void)setSendIdleEvents:(BOOL)sendIdleEvents;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeTiming'
-     */
-    class JSI_EXPORT NativeTimingSpecJSI : public ObjCTurboModule {
-    public:
-      NativeTimingSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeTimingSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeTiming'
+   */
+  class JSI_EXPORT NativeTimingSpecJSI : public ObjCTurboModule {
+  public:
+    NativeTimingSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 @protocol NativeVibrationSpec <RCTBridgeModule, RCTTurboModule>
 
@@ -1715,17 +2040,25 @@ namespace facebook {
 - (void)cancel;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeVibration'
-     */
-    class JSI_EXPORT NativeVibrationSpecJSI : public ObjCTurboModule {
-    public:
-      NativeVibrationSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeVibrationSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeVibration'
+   */
+  class JSI_EXPORT NativeVibrationSpecJSI : public ObjCTurboModule {
+  public:
+    NativeVibrationSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 namespace JS {
   namespace NativeWebSocketModule {
     struct SpecConnectOptions {
@@ -1759,17 +2092,25 @@ namespace JS {
 - (void)removeListeners:(double)count;
 
 @end
-namespace facebook {
-  namespace react {
-    /**
-     * ObjC++ class for module 'NativeWebSocketModule'
-     */
-    class JSI_EXPORT NativeWebSocketModuleSpecJSI : public ObjCTurboModule {
-    public:
-      NativeWebSocketModuleSpecJSI(const ObjCTurboModule::InitParams &params);
-    };
-  } // namespace react
-} // namespace facebook
+
+@interface NativeWebSocketModuleSpecBase : NSObject {
+@protected
+facebook::react::EventEmitterCallback _eventEmitterCallback;
+}
+- (void)setEventEmitterCallback:(EventEmitterCallbackWrapper *)eventEmitterCallbackWrapper;
+
+
+@end
+
+namespace facebook::react {
+  /**
+   * ObjC++ class for module 'NativeWebSocketModule'
+   */
+  class JSI_EXPORT NativeWebSocketModuleSpecJSI : public ObjCTurboModule {
+  public:
+    NativeWebSocketModuleSpecJSI(const ObjCTurboModule::InitParams &params);
+  };
+} // namespace facebook::react
 
 inline std::optional<double> JS::NativeAccessibilityManager::SpecSetAccessibilityContentSizeMultipliersJSMultipliers::extraSmall() const
 {
@@ -1936,10 +2277,10 @@ inline NSString *JS::NativeAlertManager::Args::message() const
   id const p = _v[@"message"];
   return RCTBridgingToOptionalString(p);
 }
-inline std::optional<facebook::react::LazyVector<id<NSObject> >> JS::NativeAlertManager::Args::buttons() const
+inline std::optional<facebook::react::LazyVector<id<NSObject>>> JS::NativeAlertManager::Args::buttons() const
 {
   id const p = _v[@"buttons"];
-  return RCTBridgingToOptionalVec(p, ^id<NSObject> (id itemValue_0) { return itemValue_0; });
+  return RCTBridgingToOptionalVec(p, ^id<NSObject>(id itemValue_0) { return itemValue_0; });
 }
 inline NSString *JS::NativeAlertManager::Args::type() const
 {
@@ -1996,7 +2337,6 @@ inline std::optional<double> JS::NativeAnimatedTurboModule::EventMapping::animat
   id const p = _v[@"animatedValueTag"];
   return RCTBridgingToOptionalDouble(p);
 }
-
 inline JS::NativeAppState::Constants::Builder::Builder(const Input i) : _factory(^{
   NSMutableDictionary *d = [NSMutableDictionary new];
   auto initialAppState = i.initialAppState.get();
@@ -2154,19 +2494,14 @@ inline std::optional<bool> JS::NativeFrameRateLogger::SpecSetGlobalOptionsOption
   id const p = _v[@"debug"];
   return RCTBridgingToOptionalBool(p);
 }
-inline std::optional<bool> JS::NativeFrameRateLogger::SpecSetGlobalOptionsOptions::reportStackTraces() const
-{
-  id const p = _v[@"reportStackTraces"];
-  return RCTBridgingToOptionalBool(p);
-}
 
 inline JS::NativeI18nManager::Constants::Builder::Builder(const Input i) : _factory(^{
   NSMutableDictionary *d = [NSMutableDictionary new];
-  auto isRTL = i.isRTL.get();
-  d[@"isRTL"] = @(isRTL);
   auto doLeftAndRightSwapInRTL = i.doLeftAndRightSwapInRTL.get();
   d[@"doLeftAndRightSwapInRTL"] = @(doLeftAndRightSwapInRTL);
-  auto localeIdentifier = i.localeIdentifier.get();
+  auto isRTL = i.isRTL.get();
+  d[@"isRTL"] = @(isRTL);
+  auto localeIdentifier = i.localeIdentifier;
   d[@"localeIdentifier"] = localeIdentifier;
   return d;
 }) {}
@@ -2246,12 +2581,12 @@ inline NSString *JS::NativeNetworkingIOS::SpecSendRequestQuery::url() const
   id const p = _v[@"url"];
   return RCTBridgingToString(p);
 }
-inline id<NSObject>  JS::NativeNetworkingIOS::SpecSendRequestQuery::data() const
+inline id<NSObject> JS::NativeNetworkingIOS::SpecSendRequestQuery::data() const
 {
   id const p = _v[@"data"];
   return p;
 }
-inline id<NSObject>  JS::NativeNetworkingIOS::SpecSendRequestQuery::headers() const
+inline id<NSObject> JS::NativeNetworkingIOS::SpecSendRequestQuery::headers() const
 {
   id const p = _v[@"headers"];
   return p;
@@ -2285,7 +2620,7 @@ inline JS::NativePlatformConstantsIOS::ConstantsReactNativeVersion::Builder::Bui
   auto patch = i.patch.get();
   d[@"patch"] = @(patch);
   auto prerelease = i.prerelease.get();
-  d[@"prerelease"] = prerelease.has_value() ? @((double)prerelease.value()) : nil;
+  d[@"prerelease"] = prerelease;
   return d;
 }) {}
 inline JS::NativePlatformConstantsIOS::ConstantsReactNativeVersion::Builder::Builder(ConstantsReactNativeVersion i) : _factory(^{
@@ -2295,6 +2630,8 @@ inline JS::NativePlatformConstantsIOS::Constants::Builder::Builder(const Input i
   NSMutableDictionary *d = [NSMutableDictionary new];
   auto isTesting = i.isTesting.get();
   d[@"isTesting"] = @(isTesting);
+  auto isDisableAnimations = i.isDisableAnimations;
+  d[@"isDisableAnimations"] = isDisableAnimations.has_value() ? @((BOOL)isDisableAnimations.value()) : nil;
   auto reactNativeVersion = i.reactNativeVersion.get();
   d[@"reactNativeVersion"] = reactNativeVersion.buildUnsafeRawValue();
   auto forceTouchAvailable = i.forceTouchAvailable.get();
@@ -2305,6 +2642,8 @@ inline JS::NativePlatformConstantsIOS::Constants::Builder::Builder(const Input i
   d[@"systemName"] = systemName;
   auto interfaceIdiom = i.interfaceIdiom.get();
   d[@"interfaceIdiom"] = interfaceIdiom;
+  auto isMacCatalyst = i.isMacCatalyst;
+  d[@"isMacCatalyst"] = isMacCatalyst.has_value() ? @((BOOL)isMacCatalyst.value()) : nil;
   return d;
 }) {}
 inline JS::NativePlatformConstantsIOS::Constants::Builder::Builder(Constants i) : _factory(^{
@@ -2330,19 +2669,9 @@ inline NSString *JS::NativePushNotificationManagerIOS::Notification::alertTitle(
   id const p = _v[@"alertTitle"];
   return RCTBridgingToOptionalString(p);
 }
-inline std::optional<double> JS::NativePushNotificationManagerIOS::Notification::fireDate() const
-{
-  id const p = _v[@"fireDate"];
-  return RCTBridgingToOptionalDouble(p);
-}
 inline NSString *JS::NativePushNotificationManagerIOS::Notification::alertBody() const
 {
   id const p = _v[@"alertBody"];
-  return RCTBridgingToOptionalString(p);
-}
-inline NSString *JS::NativePushNotificationManagerIOS::Notification::alertAction() const
-{
-  id const p = _v[@"alertAction"];
   return RCTBridgingToOptionalString(p);
 }
 inline id<NSObject> _Nullable JS::NativePushNotificationManagerIOS::Notification::userInfo() const
@@ -2355,10 +2684,15 @@ inline NSString *JS::NativePushNotificationManagerIOS::Notification::category() 
   id const p = _v[@"category"];
   return RCTBridgingToOptionalString(p);
 }
-inline NSString *JS::NativePushNotificationManagerIOS::Notification::repeatInterval() const
+inline std::optional<double> JS::NativePushNotificationManagerIOS::Notification::fireDate() const
 {
-  id const p = _v[@"repeatInterval"];
-  return RCTBridgingToOptionalString(p);
+  id const p = _v[@"fireDate"];
+  return RCTBridgingToOptionalDouble(p);
+}
+inline std::optional<double> JS::NativePushNotificationManagerIOS::Notification::fireIntervalSeconds() const
+{
+  id const p = _v[@"fireIntervalSeconds"];
+  return RCTBridgingToOptionalDouble(p);
 }
 inline std::optional<double> JS::NativePushNotificationManagerIOS::Notification::applicationIconBadgeNumber() const
 {
@@ -2424,3 +2758,4 @@ inline id<NSObject> _Nullable JS::NativeWebSocketModule::SpecConnectOptions::hea
   id const p = _v[@"headers"];
   return p;
 }
+#endif // FBReactNativeSpec_H
