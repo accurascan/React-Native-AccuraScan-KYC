@@ -62,7 +62,12 @@ target 'Accurascan_KYC' do
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
         config.build_settings['ENABLE_BITCODE'] = 'NO'
       end
+      
+      if target.name == 'fmt'
+         target.build_configurations.each do |config|
+           config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+         end
+       end
     end
-    # __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end

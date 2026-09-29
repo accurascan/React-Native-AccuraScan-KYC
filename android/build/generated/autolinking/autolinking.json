@@ -1,25 +1,25 @@
 {
-  "root": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC",
-  "reactNativePath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native",
+  "root": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC",
+  "reactNativePath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native",
   "reactNativeVersion": "0.76",
   "dependencies": {
     "@react-native-masked-view/masked-view": {
-      "root": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view",
+      "root": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view",
       "name": "@react-native-masked-view/masked-view",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view/RNCMaskedView.podspec",
+          "podspecPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view/RNCMaskedView.podspec",
           "version": "0.2.9",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view/android",
+          "sourceDir": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view/android",
           "packageImportPath": "import org.reactnative.maskedview.RNCMaskedViewPackage;",
           "packageInstance": "new RNCMaskedViewPackage()",
           "buildTypes": [],
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/@react-native-masked-view/masked-view/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -28,23 +28,23 @@
       }
     },
     "accurascan_kyc": {
-      "root": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc",
+      "root": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc",
       "name": "accurascan_kyc",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc/accurascan-kyc.podspec",
-          "version": "1.4.3",
+          "podspecPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc/accurascan-kyc.podspec",
+          "version": "1.4.5",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc/android",
+          "sourceDir": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc/android",
           "packageImportPath": "import com.accurascankyc.AccurascanKycPackage;",
           "packageInstance": "new AccurascanKycPackage()",
           "buildTypes": [],
           "libraryName": "AccurascanKyc",
           "componentDescriptors": [],
-          "cmakeListsPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/accurascan_kyc/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -53,17 +53,17 @@
       }
     },
     "react-native-safe-area-context": {
-      "root": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context",
+      "root": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context",
       "name": "react-native-safe-area-context",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
+          "podspecPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context/react-native-safe-area-context.podspec",
           "version": "4.12.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context/android",
+          "sourceDir": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context/android",
           "packageImportPath": "import com.th3rdwave.safeareacontext.SafeAreaContextPackage;",
           "packageInstance": "new SafeAreaContextPackage()",
           "buildTypes": [],
@@ -72,7 +72,7 @@
             "RNCSafeAreaProviderComponentDescriptor",
             "RNCSafeAreaViewComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -81,17 +81,17 @@
       }
     },
     "react-native-screens": {
-      "root": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-screens",
+      "root": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-screens",
       "name": "react-native-screens",
       "platforms": {
         "ios": {
-          "podspecPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-screens/RNScreens.podspec",
+          "podspecPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-screens/RNScreens.podspec",
           "version": "3.35.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-screens/android",
+          "sourceDir": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-screens/android",
           "packageImportPath": "import com.swmansion.rnscreens.RNScreensPackage;",
           "packageInstance": "new RNScreensPackage()",
           "buildTypes": [],
@@ -107,7 +107,7 @@
             "RNSScreenComponentDescriptor",
             "RNSModalScreenComponentDescriptor"
           ],
-          "cmakeListsPath": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+          "cmakeListsPath": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -273,7 +273,7 @@
         {
           "name": "--path <path>",
           "description": "Path to the React Native project root.",
-          "default": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC"
+          "default": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC"
         },
         {
           "name": "--platform <string>",
@@ -560,7 +560,7 @@
   "assets": [],
   "project": {
     "ios": {
-      "sourceDir": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/ios",
+      "sourceDir": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/ios",
       "xcodeProject": {
         "name": "Accurascan_KYC.xcworkspace",
         "path": ".",
@@ -569,7 +569,7 @@
       "assets": []
     },
     "android": {
-      "sourceDir": "/Users/accura/Desktop/t/React-Native-AccuraScan-KYC/android",
+      "sourceDir": "/Users/accura/Desktop/github/React-Native-AccuraScan-KYC/android",
       "appName": "app",
       "packageName": "accurascan.hybrid.com",
       "applicationId": "accurascan.hybrid.com",
