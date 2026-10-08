@@ -1,7 +1,8 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, min_ios_version_supported
+# platform :ios, min_ios_version_supported
+platform :ios, '16.0'
 prepare_react_native_project!
 use_frameworks!
 
@@ -59,7 +60,7 @@ target 'Accurascan_KYC' do
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
         # Bitcode is deprecated by Apple
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
         config.build_settings['ENABLE_BITCODE'] = 'NO'
       end
       
